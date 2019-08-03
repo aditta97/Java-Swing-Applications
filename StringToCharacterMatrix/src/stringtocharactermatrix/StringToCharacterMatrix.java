@@ -94,6 +94,7 @@ public class StringToCharacterMatrix extends javax.swing.JFrame {
             //for(int j = 0; j <= i; j++){
             //String s = Character.toString(StringToCharArray[i]);
                 txtOutput.setText(Character.toString(StringToCharArray[i]));
+                //txtOutput.setText(StringToCharArray[i]+" ");
                 System.out.print(StringToCharArray[i]+" ");
             //}
               
