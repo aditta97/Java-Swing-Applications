@@ -134,8 +134,8 @@ public final class ReturnBook extends javax.swing.JFrame {
 
     private void table() {
         DefaultTableModel tableModel = new DefaultTableModel();
-        String columnnNames[] = {"Issue Id", "Student Id", "Student Name", "Book Id", "Book Name", "Writer Name", "Return date", "Remaining Time", "Department", "Roll", "Batch", "Phone Number", "Edition", "Return Book"};
-        tableModel.setColumnIdentifiers(columnnNames);
+        String columnNames[] = {"Issue Id", "Student Id", "Student Name", "Book Id", "Book Name", "Writer Name", "Return date", "Remaining Time", "Department", "Roll", "Batch", "Phone Number", "Edition", "Return Book"};
+        tableModel.setColumnIdentifiers(columnNames);
 
         try {
             DBclass.createCon();
@@ -174,7 +174,6 @@ public final class ReturnBook extends javax.swing.JFrame {
                 row[13] = "Return";
 
                 tableModel.addRow(row);
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -247,7 +246,7 @@ public final class ReturnBook extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "Issue Id", "Student Id", "Student Name", "Book Id", "Book Name", "Writer Name", "Return Date", "Remaining Time", "Department", "Roll", "Batch", "Phone Number", "Edition"
             }
         ));
         jScrollPane1.setViewportView(returnBookTable);
@@ -298,9 +297,9 @@ public final class ReturnBook extends javax.swing.JFrame {
                         .addComponent(btnReset))
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
-                .addGap(27, 27, 27))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -372,7 +371,6 @@ public final class ReturnBook extends javax.swing.JFrame {
 
                     tableModel.addRow(row);
                     gotId = false;
-
                 }
 
                 if (gotId) {

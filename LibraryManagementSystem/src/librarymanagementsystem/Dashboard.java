@@ -38,6 +38,11 @@ public class Dashboard extends javax.swing.JFrame {
         btnIssueBook = new javax.swing.JButton();
         btnLogOut = new javax.swing.JButton();
         btnReturnBook = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -51,14 +56,14 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btnAddBook.setText("New Book");
+        btnAddBook.setText("Add Book");
         btnAddBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddBookActionPerformed(evt);
             }
         });
 
-        btnAddStudent.setText("New Student");
+        btnAddStudent.setText("Add Student");
         btnAddStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddStudentActionPerformed(evt);
@@ -85,6 +90,22 @@ public class Dashboard extends javax.swing.JFrame {
                 btnReturnBookActionPerformed(evt);
             }
         });
+
+        jMenu1.setText("File");
+
+        jMenuItem2.setText("jMenuItem2");
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("More");
+
+        jMenuItem1.setText("About Creator");
+        jMenu2.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,7 +137,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnReturnBook, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         pack();
@@ -196,5 +217,10 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnIssueBook;
     private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnReturnBook;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }

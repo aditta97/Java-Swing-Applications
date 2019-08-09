@@ -359,7 +359,7 @@ public final class AddBook extends javax.swing.JFrame {
                     BufferedImage newBI = new BufferedImage(bI.getWidth(), bI.getHeight(), bI.getType());
                     newBI.createGraphics().drawImage(bI, 0, 0, Color.WHITE, null);
                     try {
-                        ImageIO.write(newBI, "png", new File(System.getProperty("user.home") + "/Desktop/Profile Picture.png"));
+                        ImageIO.write(newBI, "jpg", new File(System.getProperty("user.home") + "/Desktop/Profile Picture.jpg"));
                     } catch (IOException e) {
                         e.getMessage();
                     }

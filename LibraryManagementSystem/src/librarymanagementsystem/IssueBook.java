@@ -151,8 +151,8 @@ public final class IssueBook extends javax.swing.JFrame {
 
     private void table() {
         DefaultTableModel tableModel = new DefaultTableModel();
-        String columnnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Publisher", "Pages", "Add Book"};
-        tableModel.setColumnIdentifiers(columnnNames);
+        String columnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Publisher", "Pages", "Add Book"};
+        tableModel.setColumnIdentifiers(columnNames);
 
         try {
             DBclass.createCon();
