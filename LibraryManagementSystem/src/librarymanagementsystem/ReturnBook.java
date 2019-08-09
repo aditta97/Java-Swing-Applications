@@ -171,7 +171,7 @@ public final class ReturnBook extends javax.swing.JFrame {
                 row[10] = batch;
                 row[11] = phoneNumber;
                 row[12] = edition;
-                row[13] = "Remove";
+                row[13] = "Return";
 
                 tableModel.addRow(row);
 
@@ -253,7 +253,7 @@ public final class ReturnBook extends javax.swing.JFrame {
         jScrollPane1.setViewportView(returnBookTable);
 
         jLabel9.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        jLabel9.setText("Search Book Name");
+        jLabel9.setText("Search Book Name & Student Registration");
 
         txtSearch.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -277,7 +277,7 @@ public final class ReturnBook extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(457, 457, 457)
+                        .addGap(273, 273, 273)
                         .addComponent(jLabel9)
                         .addGap(30, 30, 30)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -368,7 +368,7 @@ public final class ReturnBook extends javax.swing.JFrame {
                     row[10] = batch;
                     row[11] = phoneNumber;
                     row[12] = edition;
-                    row[13] = "Remove";
+                    row[13] = "Return";
 
                     tableModel.addRow(row);
                     gotId = false;
@@ -418,7 +418,7 @@ public final class ReturnBook extends javax.swing.JFrame {
                                 row[10] = batch;
                                 row[11] = phoneNumber;
                                 row[12] = edition;
-                                row[13] = "Remove";
+                                row[13] = "Return";
 
                                 tableModel.addRow(row);
                             }
