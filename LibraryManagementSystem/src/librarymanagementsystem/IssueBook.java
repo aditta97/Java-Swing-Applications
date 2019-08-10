@@ -556,7 +556,7 @@ public final class IssueBook extends javax.swing.JFrame {
 
         try {
             DBclass.createCon();
-            String query = "select Id, BookName, WriterName, Edition, Publisher, Pages from Book WHERE BookName = '" + bookSearh + "'";
+            String query = "select Id, BookName, WriterName, Edition, Publisher, Pages from Book WHERE BookName LIKE '%" + bookSearh + "%'";
             DBclass.pst = DBclass.con.prepareStatement(query);
             DBclass.rs = DBclass.pst.executeQuery();
             while (DBclass.rs.next()) {

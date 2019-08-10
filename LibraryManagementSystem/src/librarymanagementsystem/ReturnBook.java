@@ -252,7 +252,7 @@ public final class ReturnBook extends javax.swing.JFrame {
         jScrollPane1.setViewportView(returnBookTable);
 
         jLabel9.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        jLabel9.setText("Search Book Name & Student Registration");
+        jLabel9.setText("Search ");
 
         txtSearch.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -276,7 +276,7 @@ public final class ReturnBook extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(273, 273, 273)
+                        .addGap(431, 431, 431)
                         .addComponent(jLabel9)
                         .addGap(30, 30, 30)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -333,11 +333,11 @@ public final class ReturnBook extends javax.swing.JFrame {
                 String query = "select IssueBook.Id, StudentId, StudentName, BookId, BookName, WriterName, ReturnDate, "
                         + "RemainingTime, Department, Roll, Batch, PhoneNumber, Edition FROM IssueBook, Student, Book WHERE "
                         + "Student.Registration = IssueBook.StudentId AND Book.Id = IssueBook.BookId "
-                        + "AND IssueBook.StudentId LIKE '%" + text + "%'";
-
+                        + "AND IssueBook.StudentId LIKE '%" + text + "%' OR Book.BookName LIKE '%" 
+                        + text + "%' OR Student.StudentName LIKE '%" + text + "%' OR Book.Id = " + text;
+                System.out.println(query);
                 DBclass.pst = DBclass.con.prepareStatement(query);
                 DBclass.rs = DBclass.pst.executeQuery();
-                boolean gotId = true;
                 while (DBclass.rs.next()) {
                     int id = DBclass.rs.getInt(1);
                     int studentId = DBclass.rs.getInt(2);
@@ -370,60 +370,6 @@ public final class ReturnBook extends javax.swing.JFrame {
                     row[13] = "Return";
 
                     tableModel.addRow(row);
-                    gotId = false;
-                }
-
-                if (gotId) {
-                    DBclass.createCon();
-                    String getBookIdFromName = "SELECT Id FROM Book WHERE BookName = '" + text + "'";
-                    try {
-                        DBclass.pst = DBclass.con.prepareStatement(getBookIdFromName);
-                        DBclass.rs = DBclass.pst.executeQuery();
-                        while (DBclass.rs.next()) {
-                            int booksId = DBclass.rs.getInt(1);
-                            String query2 = "select IssueBook.Id, StudentId, StudentName, BookId, BookName, WriterName, ReturnDate, "
-                                    + "RemainingTime, Department, Roll, Batch, PhoneNumber, Edition FROM IssueBook, Student, Book WHERE "
-                                    + "Student.Registration = IssueBook.StudentId AND Book.Id = IssueBook.BookId "
-                                    + "AND IssueBook.BookId = " + booksId;
-                            DBclass.pst = DBclass.con.prepareStatement(query2);
-                            DBclass.rs = DBclass.pst.executeQuery();
-                            while (DBclass.rs.next()) {
-                                int id = DBclass.rs.getInt(1);
-                                int studentId = DBclass.rs.getInt(2);
-                                String studentName = DBclass.rs.getString(3);
-                                int bookId = DBclass.rs.getInt(4);
-                                String bookName = DBclass.rs.getString(5);
-                                String writerName = DBclass.rs.getString(6);
-                                Date returnDate = DBclass.rs.getDate(7);
-                                String remainingTime = DBclass.rs.getString(8);
-                                String department = DBclass.rs.getString(9);
-                                int roll = DBclass.rs.getInt(10);
-                                String batch = DBclass.rs.getString(11);
-                                String phoneNumber = DBclass.rs.getString(12);
-                                String edition = DBclass.rs.getString(13);
-
-                                Object[] row = new Object[14];
-                                row[0] = id;
-                                row[1] = studentId;
-                                row[2] = studentName;
-                                row[3] = bookId;
-                                row[4] = bookName;
-                                row[5] = writerName;
-                                row[6] = returnDate;
-                                row[7] = remainingTime;
-                                row[8] = department;
-                                row[9] = roll;
-                                row[10] = batch;
-                                row[11] = phoneNumber;
-                                row[12] = edition;
-                                row[13] = "Return";
-
-                                tableModel.addRow(row);
-                            }
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

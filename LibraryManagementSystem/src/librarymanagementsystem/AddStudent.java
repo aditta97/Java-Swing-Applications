@@ -37,7 +37,7 @@ import net.proteanit.sql.DbUtils;
  * @author adittachakraborty
  */
 public class AddStudent extends javax.swing.JFrame {
-
+    
     int xMouse;
     int yMouse;
     String filename = null;
@@ -49,14 +49,14 @@ public class AddStudent extends javax.swing.JFrame {
         initComponents();
         table();
     }
-
+    
     private void table() {
         try {
             DBclass.createCon();
             String query = "SELECT Registration, StudentName, Department, Roll, Batch, Session, PhoneNumber, JoiningDate FROM Student";
             DBclass.pst = DBclass.con.prepareStatement(query);
             DBclass.rs = DBclass.pst.executeQuery();
-
+            
             studentTable.setModel(DbUtils.resultSetToTableModel(DBclass.rs));
         } catch (SQLException ex) {
             Logger.getLogger(AddStudent.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,7 +80,28 @@ public class AddStudent extends javax.swing.JFrame {
         } else {
             table();
         }
-
+        
+    }
+    
+    private void profilePicture(String registration) {
+        String reg = registration;
+        try {
+            DBclass.createCon();
+            String query = "SELECT ProfilePicture FROM Student WHERE Registration = '" + reg + "'";
+            DBclass.pst = DBclass.con.prepareStatement(query);
+            DBclass.rs = DBclass.pst.executeQuery();
+            while (DBclass.rs.next()) {
+                try {
+                    InputStream inst = DBclass.rs.getBinaryStream(1);
+                    Image im = ImageIO.read(inst);
+                    labelpic.setIcon(new ImageIcon(im.getScaledInstance(labelpic.getWidth(), labelpic.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, "Error In Label Picture", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Picture Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     //For Search button (Searching by registration)
@@ -227,6 +248,7 @@ public class AddStudent extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         jLabel8.setText("Book Image");
 
+        studentTable.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         studentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -286,6 +308,8 @@ public class AddStudent extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         jLabel10.setText("Joining Date");
+
+        txtJoiningDate.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -413,7 +437,7 @@ public class AddStudent extends javax.swing.JFrame {
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-
+        
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_formMouseDragged
 
@@ -432,7 +456,7 @@ public class AddStudent extends javax.swing.JFrame {
     FileInputStream pic;
     //Picture format converting for attach image
     File fi = new File(System.getProperty("user.home") + "/Desktop/Profile Picture.png");
-
+    
     int selectAndCreate() {
         JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         chooser.setDialogTitle("Select an image");
@@ -506,7 +530,7 @@ public class AddStudent extends javax.swing.JFrame {
         } else {
             try {
                 String registration = txtRegistration.getText();
-
+                
                 DBclass.createCon();
                 String query = "SELECT Registration FROM Student WHERE Registration = '" + registration + "'";
                 DBclass.pst = DBclass.con.prepareStatement(query);
@@ -517,7 +541,7 @@ public class AddStudent extends javax.swing.JFrame {
                     DBclass.createCon();
                     String studentInsert = "INSERT INTO Student (Registration, ProfilePicture, StudentName, Department, Roll, Batch, Session, PhoneNumber, JoiningDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     DBclass.pst = DBclass.con.prepareStatement(studentInsert);
-
+                    
                     DBclass.pst.setString(1, txtRegistration.getText());
                     try {
                         DBclass.pst.setBinaryStream(2, pic, pic.available());
@@ -532,7 +556,7 @@ public class AddStudent extends javax.swing.JFrame {
                     DBclass.pst.setString(8, txtPhoneNumber.getText());
                     java.sql.Date date = new java.sql.Date(txtJoiningDate.getDate().getTime());
                     DBclass.pst.setDate(9, date);
-
+                    
                     DBclass.pst.executeUpdate();
                     table();
                     JOptionPane.showMessageDialog(this, "Student Successfully Registered", "Information Message", JOptionPane.INFORMATION_MESSAGE);
@@ -559,11 +583,11 @@ public class AddStudent extends javax.swing.JFrame {
         } else {
             try {
                 String registration = txtRegistration.getText();
-
+                
                 DBclass.createCon();
                 String query = "UPDATE Student SET StudentName = ?, Department = ?, Roll = ?, Batch = ?, Session = ?, PhoneNumber = ?, JoiningDate = ? WHERE Registration = " + registration;
                 DBclass.pst = DBclass.con.prepareStatement(query);
-
+                
                 if (DBclass.rs.next()) {
                     DBclass.pst.setString(1, txtRegistration.getText());
                     try {
@@ -580,7 +604,7 @@ public class AddStudent extends javax.swing.JFrame {
                     DBclass.pst.setString(8, txtPhoneNumber.getText());
                     java.sql.Date date = new java.sql.Date(txtJoiningDate.getDate().getTime());
                     DBclass.pst.setDate(9, date);
-
+                    
                     int k = DBclass.pst.executeUpdate();
                     if (k != 0) {
                         table();
@@ -598,14 +622,14 @@ public class AddStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        if (txtStudentName.getText().equals("") || txtDepartment.getText().equals("") || txtRoll.getText().equals("") || txtRegistration.getText().equals("") || txtBatch.getText().equals("") || txtSession.getText().equals("") || txtPhoneNumber.getText().equals("") || txtJoiningDate.getDate() == null) {
+        if (labelpic.getIcon() == null || txtStudentName.getText().equals("") || txtDepartment.getText().equals("") || txtRoll.getText().equals("") || txtRegistration.getText().equals("") || txtBatch.getText().equals("") || txtSession.getText().equals("") || txtPhoneNumber.getText().equals("") || txtJoiningDate.getDate() == null) {
             JOptionPane.showMessageDialog(this, "All Fields Are Required", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            int a = JOptionPane.showConfirmDialog(this, "Do you want to Remove?", "Delete Student", JOptionPane.YES_NO_CANCEL_OPTION);
+            int a = JOptionPane.showConfirmDialog(this, "Do you want to Remove Student?", "Remove Student", JOptionPane.YES_NO_CANCEL_OPTION);
             if (a == 0) {
                 try {
                     String registration = txtRegistration.getText();
-
+                    
                     DBclass.createCon();
                     String query = "DELETE FROM Student WHERE Registration = " + registration;
                     DBclass.pst = DBclass.con.prepareStatement(query);
@@ -622,7 +646,9 @@ public class AddStudent extends javax.swing.JFrame {
     private void studentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_studentTableMouseClicked
         //get values from jTable to components by mouse clicked
         int i = studentTable.getSelectedRow();
-        txtRegistration.setText(studentTable.getValueAt(i, 0).toString());
+        String registration = studentTable.getValueAt(i, 0).toString();
+        txtRegistration.setText(registration);
+        profilePicture(registration);
         txtStudentName.setText(studentTable.getValueAt(i, 1).toString());
         txtDepartment.setText(studentTable.getValueAt(i, 2).toString());
         txtRoll.setText(studentTable.getValueAt(i, 3).toString());
@@ -640,6 +666,7 @@ public class AddStudent extends javax.swing.JFrame {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         table();
+        labelpic.setIcon(null);
         txtRegistration.setText("");
         txtStudentName.setText("");
         txtDepartment.setText("");
