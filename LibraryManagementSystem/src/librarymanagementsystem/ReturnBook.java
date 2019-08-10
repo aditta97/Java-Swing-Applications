@@ -319,6 +319,7 @@ public final class ReturnBook extends javax.swing.JFrame {
     }//GEN-LAST:event_formMousePressed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        txtSearch.setText("");
         table();
     }//GEN-LAST:event_btnResetActionPerformed
     private void bookSearch(String search) {
@@ -334,8 +335,7 @@ public final class ReturnBook extends javax.swing.JFrame {
                         + "RemainingTime, Department, Roll, Batch, PhoneNumber, Edition FROM IssueBook, Student, Book WHERE "
                         + "Student.Registration = IssueBook.StudentId AND Book.Id = IssueBook.BookId "
                         + "AND IssueBook.StudentId LIKE '%" + text + "%' OR Book.BookName LIKE '%" 
-                        + text + "%' OR Student.StudentName LIKE '%" + text + "%' OR Book.Id = " + text;
-                System.out.println(query);
+                        + text + "%' OR Student.StudentName LIKE '%" + text + "%'";
                 DBclass.pst = DBclass.con.prepareStatement(query);
                 DBclass.rs = DBclass.pst.executeQuery();
                 while (DBclass.rs.next()) {
