@@ -109,7 +109,7 @@ public class AddStudent extends javax.swing.JFrame {
         String search = registration;
         try {
             DBclass.createCon();
-            String query = "SELECT ProfilePicture, StudentName, Department, Roll, Batch, Session, PhoneNumber, JoiningDate FROM Student WHERE Registration = " + search;
+            String query = "SELECT ProfilePicture, StudentName, Department, Roll, Batch, Session, PhoneNumber, JoiningDate FROM Student WHERE Registration = '" + search + "'";
             DBclass.pst = DBclass.con.prepareStatement(query);
             DBclass.rs = DBclass.pst.executeQuery();
             while (DBclass.rs.next()) {

@@ -3,7 +3,7 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Issue Book"/>
+    <Property name="title" type="java.lang.String" value="Delete Book"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -32,10 +32,6 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
-                      <Component id="labelpic" min="-2" pref="180" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -45,24 +41,27 @@
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="returnDateChooser" min="-2" pref="291" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtRegistration" pref="291" max="32767" attributes="0"/>
-                              <Component id="txtPhoneNumber" pref="291" max="32767" attributes="0"/>
-                              <Component id="txtSession" alignment="0" pref="291" max="32767" attributes="0"/>
-                              <Component id="txtBatch" alignment="0" pref="291" max="32767" attributes="0"/>
-                              <Component id="txtRoll" alignment="0" pref="291" max="32767" attributes="0"/>
-                              <Component id="txtDepartment" alignment="0" pref="291" max="32767" attributes="0"/>
-                              <Component id="txtStudentName" pref="291" max="32767" attributes="0"/>
-                              <Component id="issueDateChooser" alignment="1" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="txtPrice" min="-2" pref="291" max="-2" attributes="0"/>
+                          <Component id="txtPages" alignment="0" min="-2" pref="291" max="-2" attributes="0"/>
+                          <Component id="txtPublisher" alignment="0" min="-2" pref="291" max="-2" attributes="0"/>
+                          <Component id="txtQuantity" alignment="0" min="-2" pref="291" max="-2" attributes="0"/>
+                          <Component id="txtEdition" alignment="0" min="-2" pref="291" max="-2" attributes="0"/>
+                          <Component id="txtWriterName" min="-2" pref="291" max="-2" attributes="0"/>
+                          <Component id="txtBookName" min="-2" pref="291" max="-2" attributes="0"/>
+                          <Component id="txtBookId" alignment="0" min="-2" pref="291" max="-2" attributes="0"/>
                       </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                      <Component id="labelpic" min="-2" pref="180" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -73,7 +72,7 @@
                       <Component id="txtSearch" min="-2" pref="255" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="btnReset" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="293" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="261" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
@@ -85,68 +84,65 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                              <Component id="btnReset" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtSearch" alignment="1" min="-2" pref="29" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="labelpic" min="-2" pref="180" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="23" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel4" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="txtRegistration" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtBookId" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel8" alignment="3" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel1" max="32767" attributes="0"/>
+                          <Component id="txtBookName" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtStudentName" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtWriterName" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel3" max="32767" attributes="0"/>
+                          <Component id="txtEdition" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtRoll" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="3" max="32767" attributes="0"/>
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtQuantity" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel5" max="32767" attributes="0"/>
-                          <Component id="txtBatch" max="32767" attributes="0"/>
+                          <Component id="txtPublisher" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtSession" min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="jLabel7" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="txtPages" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                              <Component id="jLabel7" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="txtPhoneNumber" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="txtPrice" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="issueDateChooser" max="32767" attributes="0"/>
-                          <Component id="jLabel8" pref="24" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="returnDateChooser" min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="jLabel11" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jLabel9" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Component id="btnReset" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="txtSearch" alignment="1" min="-2" pref="29" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -160,7 +156,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Student"/>
+        <Property name="text" type="java.lang.String" value="Book Name"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -168,7 +164,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Department"/>
+        <Property name="text" type="java.lang.String" value="Writer Name"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -176,7 +172,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Roll"/>
+        <Property name="text" type="java.lang.String" value="Edition"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -184,7 +180,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Registration"/>
+        <Property name="text" type="java.lang.String" value="Quantity"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
@@ -192,7 +188,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Batch"/>
+        <Property name="text" type="java.lang.String" value="Publisher"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -200,7 +196,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Phone Number"/>
+        <Property name="text" type="java.lang.String" value="Price"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -208,36 +204,61 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Session"/>
+        <Property name="text" type="java.lang.String" value="Pages"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtRegistration">
+    <Component class="javax.swing.JTextField" name="txtBookName">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtWriterName">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Monaco" size="14" style="0"/>
+        </Property>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEdition">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Monaco" size="14" style="0"/>
+        </Property>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtQuantity">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Monaco" size="14" style="0"/>
+        </Property>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPublisher">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Monaco" size="14" style="0"/>
+        </Property>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPages">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Monaco" size="14" style="0"/>
+        </Property>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRegistrationKeyReleased"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPagesKeyTyped"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtStudentName">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Monaco" size="14" style="0"/>
-        </Property>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtDepartment">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Monaco" size="14" style="0"/>
-        </Property>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtRoll">
+    <Component class="javax.swing.JTextField" name="txtPrice">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
@@ -245,34 +266,7 @@
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRollKeyTyped"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtBatch">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Monaco" size="14" style="0"/>
-        </Property>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtSession">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Monaco" size="14" style="0"/>
-        </Property>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtPhoneNumber">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Monaco" size="14" style="0"/>
-        </Property>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPhoneNumberKeyTyped"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPriceKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelpic">
@@ -294,13 +288,63 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="issueBookTable">
+        <Component class="javax.swing.JTable" name="bookTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="0" rowCount="0"/>
+              <Table columnCount="8" rowCount="0">
+                <Column editable="true" title="Id" type="java.lang.Object"/>
+                <Column editable="true" title="Book Name" type="java.lang.Object"/>
+                <Column editable="true" title="Writer Name" type="java.lang.Object"/>
+                <Column editable="true" title="Edition" type="java.lang.Object"/>
+                <Column editable="true" title="Quantity" type="java.lang.Object"/>
+                <Column editable="true" title="Publisher" type="java.lang.Object"/>
+                <Column editable="true" title="Pages" type="java.lang.Object"/>
+                <Column editable="true" title="Price" type="java.lang.Object"/>
+              </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-              <TableColumnModel selectionModel="0"/>
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -314,7 +358,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Search Book"/>
+        <Property name="text" type="java.lang.String" value="Search Book Name"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtSearch">
@@ -338,42 +382,34 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel10">
+    <Component class="javax.swing.JButton" name="btnDelete">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Student Name"/>
+        <Property name="text" type="java.lang.String" value="Delete"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtBookId">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Monaco" size="14" style="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBookIdKeyTyped"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBookIdKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Issue Date"/>
-      </Properties>
-    </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="issueDateChooser">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Monaco" size="14" style="0"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel11">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Monaco" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Return Date"/>
-      </Properties>
-    </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="returnDateChooser">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Monaco" size="14" style="0"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Book Id"/>
       </Properties>
     </Component>
   </SubComponents>
