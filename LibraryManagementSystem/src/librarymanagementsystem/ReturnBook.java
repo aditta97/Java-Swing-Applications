@@ -334,7 +334,7 @@ public final class ReturnBook extends javax.swing.JFrame {
                 String query = "select IssueBook.Id, StudentId, StudentName, BookId, BookName, WriterName, ReturnDate, "
                         + "RemainingTime, Department, Roll, Batch, PhoneNumber, Edition FROM IssueBook, Student, Book WHERE "
                         + "Student.Registration = IssueBook.StudentId AND Book.Id = IssueBook.BookId "
-                        + "AND IssueBook.StudentId LIKE '%" + text + "%' OR Book.BookName LIKE '%" 
+                        + "AND IssueBook.StudentId LIKE '%" + text + "%' OR Book.BookName LIKE '%"
                         + text + "%' OR Student.StudentName LIKE '%" + text + "%'";
                 DBclass.pst = DBclass.con.prepareStatement(query);
                 DBclass.rs = DBclass.pst.executeQuery();
