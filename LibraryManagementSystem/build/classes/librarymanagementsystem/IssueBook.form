@@ -72,7 +72,7 @@
                       <Component id="txtSearch" min="-2" pref="255" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="btnReset" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="253" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="293" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
@@ -313,7 +313,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Search Book Name"/>
+        <Property name="text" type="java.lang.String" value="Search Book"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtSearch">

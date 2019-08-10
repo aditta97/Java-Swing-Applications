@@ -48,18 +48,19 @@ public class AddStudent extends javax.swing.JFrame {
     public AddStudent() {
         initComponents();
         table();
+        studentTable.setRowHeight(35);
     }
     
     private void table() {
         try {
             DBclass.createCon();
-            String query = "SELECT Registration, StudentName, Department, Roll, Batch, Session, PhoneNumber, JoiningDate FROM Student";
+            String query = "SELECT Registration, StudentName AS 'Student Name', Department, Roll, Batch, Session, PhoneNumber AS 'Phone Number', JoiningDate AS 'Joining Date' FROM Student";
             DBclass.pst = DBclass.con.prepareStatement(query);
             DBclass.rs = DBclass.pst.executeQuery();
             
             studentTable.setModel(DbUtils.resultSetToTableModel(DBclass.rs));
         } catch (SQLException ex) {
-            Logger.getLogger(AddStudent.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Student Table Not Found", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -69,12 +70,11 @@ public class AddStudent extends javax.swing.JFrame {
         if (!txtSearch.getText().isEmpty()) {
             try {
                 DBclass.createCon();
-                String query = "SELECT Registration, StudentName, Department, Roll, Batch, Session, PhoneNumber, JoiningDate FROM Student WHERE Registration = '" + search + "'";
+                String query = "SELECT Registration, StudentName AS 'Student Name', Department, Roll, Batch, Session, PhoneNumber AS 'Phone Number', JoiningDate AS 'Joining Date' FROM Student WHERE Registration LIKE '%" + search + "%' OR StudentName LIKE '%" + search + "%' OR Department LIKE '%" + search + "%'";
                 DBclass.pst = DBclass.con.prepareStatement(query);
                 DBclass.rs = DBclass.pst.executeQuery();
                 studentTable.setModel(DbUtils.resultSetToTableModel(DBclass.rs));
             } catch (SQLException e) {
-                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error In Search Fetch", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
@@ -265,7 +265,7 @@ public class AddStudent extends javax.swing.JFrame {
         jScrollPane1.setViewportView(studentTable);
 
         jLabel9.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        jLabel9.setText("Search by Reg");
+        jLabel9.setText("Search");
 
         txtSearch.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -359,7 +359,7 @@ public class AddStudent extends javax.swing.JFrame {
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(btnReset)
-                        .addGap(0, 277, Short.MAX_VALUE))
+                        .addGap(0, 333, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addGap(20, 20, 20))
         );

@@ -44,6 +44,7 @@ public final class AddBook extends javax.swing.JFrame {
     public AddBook() {
         initComponents();
         table();
+        bookTable.setRowHeight(35);
     }
 
     void table() {
@@ -88,7 +89,7 @@ public final class AddBook extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         bookTable = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         btnReset = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -139,6 +140,11 @@ public final class AddBook extends javax.swing.JFrame {
         txtPublisher.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
 
         txtPages.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        txtPages.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPagesKeyTyped(evt);
+            }
+        });
 
         txtPrice.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         txtPrice.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -174,7 +180,12 @@ public final class AddBook extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         jLabel9.setText("Search Book");
 
-        jTextField1.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        txtSearch.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
 
         btnReset.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         btnReset.setText("Reset");
@@ -250,7 +261,7 @@ public final class AddBook extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(30, 30, 30)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(btnReset)
                         .addGap(0, 301, Short.MAX_VALUE))
@@ -287,7 +298,7 @@ public final class AddBook extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtPublisher))
@@ -309,7 +320,7 @@ public final class AddBook extends javax.swing.JFrame {
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(20, 20, 20)
                         .addComponent(jScrollPane1)))
                 .addGap(25, 25, 25))
@@ -520,8 +531,21 @@ public final class AddBook extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
+        txtSearch.setText("");
+        table();
     }//GEN-LAST:event_btnResetActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void txtPagesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPagesKeyTyped
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPagesKeyTyped
 
     /**
      * @param args the command line arguments
@@ -571,7 +595,6 @@ public final class AddBook extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelpic;
     private javax.swing.JTextField txtBookName;
     private javax.swing.JTextField txtEdition;
@@ -579,6 +602,7 @@ public final class AddBook extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtPublisher;
     private javax.swing.JTextField txtQuantity;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtWriterName;
     // End of variables declaration//GEN-END:variables
 }

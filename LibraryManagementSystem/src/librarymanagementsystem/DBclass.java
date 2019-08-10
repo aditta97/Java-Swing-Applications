@@ -61,4 +61,12 @@ public class DBclass {
         }
     }
     
+    public static void closeCon2() {
+        try {
+            con2.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBclass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

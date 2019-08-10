@@ -32,10 +32,6 @@ public final class IssueBook extends javax.swing.JFrame {
 
     int xMouse;
     int yMouse;
-    Connection con = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
-    String filename = null;
 
     /**
      * Creates new form AddBook
@@ -116,7 +112,7 @@ public final class IssueBook extends javax.swing.JFrame {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Book Id Not Found", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -327,7 +323,7 @@ public final class IssueBook extends javax.swing.JFrame {
         jScrollPane1.setViewportView(issueBookTable);
 
         jLabel9.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        jLabel9.setText("Search Book Name");
+        jLabel9.setText("Search Book");
 
         txtSearch.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -399,7 +395,7 @@ public final class IssueBook extends javax.swing.JFrame {
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(btnReset)
-                        .addGap(0, 253, Short.MAX_VALUE))
+                        .addGap(0, 293, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addGap(20, 20, 20))
         );
@@ -504,7 +500,7 @@ public final class IssueBook extends javax.swing.JFrame {
         issueDateChooser.setDate(null);
         returnDateChooser.setDate(null);
     }//GEN-LAST:event_btnResetActionPerformed
-    //For Search button (Searching by Registration)
+    //For Search Field
     public void Searchfetch(String registration) {
         String search = registration;
         try {
@@ -549,14 +545,15 @@ public final class IssueBook extends javax.swing.JFrame {
         String search = txtRegistration.getText();
         Searchfetch(search);
     }//GEN-LAST:event_txtRegistrationKeyReleased
-    private void bookSearch(String bookSearh) {
+    private void bookSearch(String bookSearch) {
         DefaultTableModel tableModel = new DefaultTableModel();
         String columnnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Publisher", "Pages", "Add Book"};
         tableModel.setColumnIdentifiers(columnnNames);
 
         try {
             DBclass.createCon();
-            String query = "select Id, BookName, WriterName, Edition, Publisher, Pages from Book WHERE BookName LIKE '%" + bookSearh + "%'";
+            String query = "select Id, BookName, WriterName, Edition, Publisher, Pages from Book WHERE BookName LIKE '%" 
+                    + bookSearch + "%' OR WriterName LIKE '%" + bookSearch + "%' OR Publisher LIKE '%" + bookSearch + "%'";
             DBclass.pst = DBclass.con.prepareStatement(query);
             DBclass.rs = DBclass.pst.executeQuery();
             while (DBclass.rs.next()) {
