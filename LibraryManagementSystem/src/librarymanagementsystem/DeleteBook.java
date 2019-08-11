@@ -167,7 +167,7 @@ public final class DeleteBook extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         btnReset = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
+        btnDeleteBook = new javax.swing.JButton();
         txtBookId = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
 
@@ -268,11 +268,11 @@ public final class DeleteBook extends javax.swing.JFrame {
             }
         });
 
-        btnDelete.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+        btnDeleteBook.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnDeleteBook.setText("Delete Book");
+        btnDeleteBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
+                btnDeleteBookActionPerformed(evt);
             }
         });
 
@@ -317,11 +317,11 @@ public final class DeleteBook extends javax.swing.JFrame {
                             .addComponent(txtBookName, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtBookId, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
+                        .addGap(151, 151, 151)
                         .addComponent(labelpic, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
-                        .addComponent(btnDelete)))
+                        .addGap(160, 160, 160)
+                        .addComponent(btnDeleteBook)))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -376,7 +376,7 @@ public final class DeleteBook extends javax.swing.JFrame {
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
-                        .addComponent(btnDelete))
+                        .addComponent(btnDeleteBook))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -412,7 +412,7 @@ public final class DeleteBook extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPriceKeyTyped
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+    private void btnDeleteBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteBookActionPerformed
         if (labelpic.getIcon() == null || txtBookName.getText().equals("") || txtWriterName.getText().equals("") || txtEdition.getText().equals("") || txtQuantity.getText().equals("") || txtPublisher.getText().equals("") || txtPages.getText().equals("") || txtPrice.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "All Fields Are Required", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -435,7 +435,7 @@ public final class DeleteBook extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_btnDeleteActionPerformed
+    }//GEN-LAST:event_btnDeleteBookActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         txtSearch.setText("");
@@ -612,7 +612,7 @@ public final class DeleteBook extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable bookTable;
-    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnDeleteBook;
     private javax.swing.JButton btnReset;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -73,7 +73,10 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-              <Component id="btnLogOut" min="-2" pref="161" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="btnLogOut" min="-2" pref="161" max="-2" attributes="0"/>
+                  <Component id="btnDeleteBook" min="-2" pref="161" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="210" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -85,6 +88,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnAddBook" alignment="3" min="-2" pref="142" max="-2" attributes="0"/>
                   <Component id="btnAddStudent" alignment="3" min="-2" pref="142" max="-2" attributes="0"/>
+                  <Component id="btnDeleteBook" alignment="3" min="-2" pref="142" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -136,6 +140,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReturnBookActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnDeleteBook">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete Book"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteBookActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

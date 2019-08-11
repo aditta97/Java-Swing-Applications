@@ -6,6 +6,7 @@
 package librarymanagementsystem;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -26,10 +27,13 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -37,7 +41,7 @@ import net.proteanit.sql.DbUtils;
  * @author adittachakraborty
  */
 public class AddStudent extends javax.swing.JFrame {
-    
+
     int xMouse;
     int yMouse;
     String filename = null;
@@ -50,15 +54,32 @@ public class AddStudent extends javax.swing.JFrame {
         table();
         studentTable.setRowHeight(35);
     }
-    
+
+    //jTable date format change
+    void ChangeTableDateFormat() {
+        TableCellRenderer tableCellRenderer = new DefaultTableCellRenderer() {
+            SimpleDateFormat f = new SimpleDateFormat("dd MMM yyyy");
+
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                if (value instanceof java.util.Date) {
+                    value = f.format(value);
+                }
+                return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            }
+        };
+        studentTable.getColumnModel().getColumn(7).setCellRenderer(tableCellRenderer);
+    }
+
     private void table() {
         try {
             DBclass.createCon();
             String query = "SELECT Registration, StudentName AS 'Student Name', Department, Roll, Batch, Session, PhoneNumber AS 'Phone Number', JoiningDate AS 'Joining Date' FROM Student";
             DBclass.pst = DBclass.con.prepareStatement(query);
             DBclass.rs = DBclass.pst.executeQuery();
-            
+
             studentTable.setModel(DbUtils.resultSetToTableModel(DBclass.rs));
+            ChangeTableDateFormat();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Student Table Not Found", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -74,15 +95,16 @@ public class AddStudent extends javax.swing.JFrame {
                 DBclass.pst = DBclass.con.prepareStatement(query);
                 DBclass.rs = DBclass.pst.executeQuery();
                 studentTable.setModel(DbUtils.resultSetToTableModel(DBclass.rs));
+                ChangeTableDateFormat();
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Error In Search Fetch", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             table();
         }
-        
+
     }
-    
+
     private void profilePicture(String registration) {
         String reg = registration;
         try {
@@ -129,6 +151,7 @@ public class AddStudent extends javax.swing.JFrame {
                 txtPhoneNumber.setText(DBclass.rs.getString(7));
                 txtJoiningDate.setDate(DBclass.rs.getDate(8));
             }
+            ChangeTableDateFormat();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error In Search Fetch", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -437,7 +460,7 @@ public class AddStudent extends javax.swing.JFrame {
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        
+
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_formMouseDragged
 
@@ -456,7 +479,7 @@ public class AddStudent extends javax.swing.JFrame {
     FileInputStream pic;
     //Picture format converting for attach image
     File fi = new File(System.getProperty("user.home") + "/Desktop/Profile Picture.png");
-    
+
     int selectAndCreate() {
         JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         chooser.setDialogTitle("Select an image");
@@ -530,7 +553,7 @@ public class AddStudent extends javax.swing.JFrame {
         } else {
             try {
                 String registration = txtRegistration.getText();
-                
+
                 DBclass.createCon();
                 String query = "SELECT Registration FROM Student WHERE Registration = '" + registration + "'";
                 DBclass.pst = DBclass.con.prepareStatement(query);
@@ -541,7 +564,7 @@ public class AddStudent extends javax.swing.JFrame {
                     DBclass.createCon();
                     String studentInsert = "INSERT INTO Student (Registration, ProfilePicture, StudentName, Department, Roll, Batch, Session, PhoneNumber, JoiningDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     DBclass.pst = DBclass.con.prepareStatement(studentInsert);
-                    
+
                     DBclass.pst.setString(1, txtRegistration.getText());
                     try {
                         DBclass.pst.setBinaryStream(2, pic, pic.available());
@@ -556,7 +579,7 @@ public class AddStudent extends javax.swing.JFrame {
                     DBclass.pst.setString(8, txtPhoneNumber.getText());
                     java.sql.Date date = new java.sql.Date(txtJoiningDate.getDate().getTime());
                     DBclass.pst.setDate(9, date);
-                    
+
                     DBclass.pst.executeUpdate();
                     table();
                     JOptionPane.showMessageDialog(this, "Student Successfully Registered", "Information Message", JOptionPane.INFORMATION_MESSAGE);
@@ -583,11 +606,11 @@ public class AddStudent extends javax.swing.JFrame {
         } else {
             try {
                 String registration = txtRegistration.getText();
-                
+
                 DBclass.createCon();
                 String query = "UPDATE Student SET StudentName = ?, Department = ?, Roll = ?, Batch = ?, Session = ?, PhoneNumber = ?, JoiningDate = ? WHERE Registration = " + registration;
                 DBclass.pst = DBclass.con.prepareStatement(query);
-                
+
                 if (DBclass.rs.next()) {
                     DBclass.pst.setString(1, txtRegistration.getText());
                     try {
@@ -604,7 +627,7 @@ public class AddStudent extends javax.swing.JFrame {
                     DBclass.pst.setString(8, txtPhoneNumber.getText());
                     java.sql.Date date = new java.sql.Date(txtJoiningDate.getDate().getTime());
                     DBclass.pst.setDate(9, date);
-                    
+
                     int k = DBclass.pst.executeUpdate();
                     if (k != 0) {
                         table();
@@ -629,7 +652,7 @@ public class AddStudent extends javax.swing.JFrame {
             if (a == 0) {
                 try {
                     String registration = txtRegistration.getText();
-                    
+
                     DBclass.createCon();
                     String query = "DELETE FROM Student WHERE Registration = " + registration;
                     DBclass.pst = DBclass.con.prepareStatement(query);

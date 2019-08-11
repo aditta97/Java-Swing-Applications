@@ -8,6 +8,7 @@ package librarymanagementsystem;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -15,10 +16,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -26,6 +30,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -47,17 +52,89 @@ public final class AddBook extends javax.swing.JFrame {
         bookTable.setRowHeight(35);
     }
 
-    void table() {
+    private void selectBook(int id) {
+        int bookId = id;
         try {
             DBclass.createCon();
-            String query = "SELECT BookName, WriterName, Edition, Quantity, Publisher, Pages, Price FROM Book";
+            String query = "SELECT * FROM Book WHERE ID = " + bookId;
             DBclass.pst = DBclass.con.prepareStatement(query);
             DBclass.rs = DBclass.pst.executeQuery();
-
-            bookTable.setModel(DbUtils.resultSetToTableModel(DBclass.rs));
-        } catch (SQLException ex) {
-            Logger.getLogger(AddStudent.class.getName()).log(Level.SEVERE, null, ex);
+            while (DBclass.rs.next()) {
+                try {
+                    InputStream is = DBclass.rs.getBinaryStream("BookImage");
+                    Image im = ImageIO.read(is);
+                    Image img2 = im.getScaledInstance(labelpic.getWidth(), labelpic.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon i = new ImageIcon(img2);
+                    labelpic.setIcon(i);
+                } catch (IOException | SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Picture Not Found", "Error To Get Picture", JOptionPane.ERROR_MESSAGE);
+                }
+                txtBookName.setText(DBclass.rs.getString("BookName"));
+                txtWriterName.setText(DBclass.rs.getString("WriterName"));
+                txtEdition.setText(DBclass.rs.getString("Edition"));
+                txtQuantity.setText(String.valueOf(DBclass.rs.getInt("Quantity")));
+                txtPublisher.setText(DBclass.rs.getString("Publisher"));
+                txtPages.setText(String.valueOf(DBclass.rs.getInt("Pages")));
+                txtPrice.setText(String.valueOf(DBclass.rs.getInt("Price")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
+
+    private void table() {
+        DefaultTableModel tableModel = new DefaultTableModel();
+        String columnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price", "Select Book"};
+        tableModel.setColumnIdentifiers(columnNames);
+
+        try {
+            DBclass.createCon();
+            String query = "select Id, BookName, WriterName, Edition, Quantity, Publisher, Pages, Price from Book";
+            DBclass.pst = DBclass.con.prepareStatement(query);
+            DBclass.rs = DBclass.pst.executeQuery();
+            while (DBclass.rs.next()) {
+                int id = DBclass.rs.getInt(1);
+                String name = DBclass.rs.getString(2);
+                String writerName = DBclass.rs.getString(3);
+                String edition = DBclass.rs.getString(4);
+                int quantity = DBclass.rs.getInt(5);
+                String publisher = DBclass.rs.getString(6);
+                int pages = DBclass.rs.getInt(7);
+                int price = DBclass.rs.getInt(8);
+
+                Object[] row = new Object[9];
+                row[0] = id;
+                row[1] = name;
+                row[2] = writerName;
+                row[3] = edition;
+                row[4] = quantity;
+                row[5] = publisher;
+                row[6] = pages;
+                row[7] = price;
+                row[8] = "Select";
+
+                tableModel.addRow(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        bookTable.setModel(tableModel);
+
+        Action doSomething = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //JTable table = (JTable) e.getSource();
+                int row = Integer.valueOf(e.getActionCommand());
+                bookTable.getSelectionModel().addSelectionInterval(row, row);
+                DefaultTableModel model = (DefaultTableModel) bookTable.getModel();
+                int rowIndex = bookTable.getSelectedRow();
+
+                selectBook((int) model.getValueAt(rowIndex, 0)); //Book Id
+            }
+        };
+
+        TableButton tableButton = new TableButton(bookTable, doSomething, 8);
     }
 
     /**
@@ -93,7 +170,6 @@ public final class AddBook extends javax.swing.JFrame {
         btnReset = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Book");
@@ -173,7 +249,7 @@ public final class AddBook extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price"
+                "Book Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price"
             }
         ));
         jScrollPane1.setViewportView(bookTable);
@@ -197,7 +273,7 @@ public final class AddBook extends javax.swing.JFrame {
         });
 
         btnSave.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        btnSave.setText("Save");
+        btnSave.setText("Save Book");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -205,18 +281,10 @@ public final class AddBook extends javax.swing.JFrame {
         });
 
         btnUpdate.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        btnUpdate.setText("Update");
+        btnUpdate.setText("Update Book");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -248,15 +316,13 @@ public final class AddBook extends javax.swing.JFrame {
                             .addComponent(txtBookName, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAttachImage)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
+                        .addGap(151, 151, 151)
                         .addComponent(labelpic, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                        .addGap(80, 80, 80)
                         .addComponent(btnSave)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnUpdate)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnDelete)))
+                        .addGap(60, 60, 60)
+                        .addComponent(btnUpdate)))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -270,7 +336,7 @@ public final class AddBook extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnDelete, btnSave, btnUpdate});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSave, btnUpdate});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,8 +382,7 @@ public final class AddBook extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSave)
-                            .addComponent(btnUpdate)
-                            .addComponent(btnDelete)))
+                            .addComponent(btnUpdate)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -329,7 +394,7 @@ public final class AddBook extends javax.swing.JFrame {
                 .addGap(25, 25, 25))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnDelete, btnSave, btnUpdate});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnSave, btnUpdate});
 
         pack();
         setLocationRelativeTo(null);
@@ -509,37 +574,77 @@ public final class AddBook extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        if (labelpic.getIcon() == null || txtBookName.getText().equals("") || txtWriterName.getText().equals("") || txtEdition.getText().equals("") || txtQuantity.getText().equals("") || txtPublisher.getText().equals("") || txtPages.getText().equals("") || txtPrice.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "All Fields Are Required", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            int a = JOptionPane.showConfirmDialog(this, "Do you want to Delete?", "Delete Student", JOptionPane.YES_NO_CANCEL_OPTION);
-            if (a == 0) {
-                try {
-                    String bookName = txtBookName.getText();
-                    String writername = txtWriterName.getText();
-                    String edition = txtEdition.getText();
-
-                    DBclass.createCon();
-                    String query = "DELETE FROM Book WHERE BookName = '" + bookName + "' AND WriterName = '" + writername + "' AND Edition = " + edition;
-                    DBclass.pst = DBclass.con.prepareStatement(query);
-                    DBclass.pst.executeUpdate();
-                    table();
-                    JOptionPane.showMessageDialog(this, "Book Succesfully Deleted", "Student Deleted", JOptionPane.INFORMATION_MESSAGE);
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(this, "Book Is Not Deleted", "Not Deleted", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         txtSearch.setText("");
+        txtBookName.setText("");
+        txtWriterName.setText("");
+        txtEdition.setText("");
+        txtQuantity.setText("");
+        txtPublisher.setText("");
+        txtPages.setText("");
+        txtPrice.setText("");
         table();
     }//GEN-LAST:event_btnResetActionPerformed
+    private void bookSearch(String bookSearch) {
+        String book = bookSearch;
+        DefaultTableModel tableModel = new DefaultTableModel();
+        String columnnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price", "Select Book"};
+        tableModel.setColumnIdentifiers(columnnNames);
 
+        try {
+            DBclass.createCon();
+            String query = "select Id, BookName, WriterName, Edition, Quantity, Publisher, Pages, Price from Book WHERE BookName LIKE '%"
+                    + book + "%' OR WriterName LIKE '%" + book + "%' OR Publisher LIKE '%" + book + "%'";
+            DBclass.pst = DBclass.con.prepareStatement(query);
+            DBclass.rs = DBclass.pst.executeQuery();
+            while (DBclass.rs.next()) {
+                int id = DBclass.rs.getInt(1);
+                String name = DBclass.rs.getString(2);
+                String writerName = DBclass.rs.getString(3);
+                String edition = DBclass.rs.getString(4);
+                int quantity = DBclass.rs.getInt(5);
+                String publisher = DBclass.rs.getString(6);
+                int pages = DBclass.rs.getInt(7);
+                int price = DBclass.rs.getInt(8);
+
+                Object[] row = new Object[9];
+                row[0] = id;
+                row[1] = name;
+                row[2] = writerName;
+                row[3] = edition;
+                row[4] = quantity;
+                row[5] = publisher;
+                row[6] = pages;
+                row[7] = price;
+                row[8] = "Select";
+
+                tableModel.addRow(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        bookTable.setModel(tableModel);
+
+        Action doSomething = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //JTable table = (JTable) e.getSource();
+                int row = Integer.valueOf(e.getActionCommand());
+                bookTable.getSelectionModel().addSelectionInterval(row, row);
+                DefaultTableModel model = (DefaultTableModel) bookTable.getModel();
+                int rowIndex = bookTable.getSelectedRow();
+
+                selectBook((int) model.getValueAt(rowIndex, 0)); //Book Id
+            }
+
+        };
+
+        TableButton tableButton = new TableButton(bookTable, doSomething, 8);
+    }
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        // TODO add your handling code here:
+        String search = txtSearch.getText();
+        bookSearch(search);
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void txtPagesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPagesKeyTyped
@@ -584,7 +689,6 @@ public final class AddBook extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable bookTable;
     private javax.swing.JButton btnAttachImage;
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUpdate;
