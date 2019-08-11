@@ -12,18 +12,14 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -43,7 +39,7 @@ import javax.swing.table.TableCellRenderer;
  *
  * @author adittachakraborty
  */
-public class AddStudent extends javax.swing.JFrame {
+public class RemoveStudent extends javax.swing.JFrame {
 
     int xMouse;
     int yMouse;
@@ -52,7 +48,7 @@ public class AddStudent extends javax.swing.JFrame {
     /**
      * Creates new form AddBook
      */
-    public AddStudent() {
+    public RemoveStudent() {
         initComponents();
         table();
         studentTable.setRowHeight(35);
@@ -83,13 +79,11 @@ public class AddStudent extends javax.swing.JFrame {
             DBclass.rs = DBclass.pst.executeQuery();
             while (DBclass.rs.next()) {
                 try {
-                    InputStream is = DBclass.rs.getBinaryStream("ProfilePicture");
-                    Image im = ImageIO.read(is);
-                    Image img2 = im.getScaledInstance(labelpic.getWidth(), labelpic.getHeight(), Image.SCALE_SMOOTH);
-                    ImageIcon i = new ImageIcon(img2);
-                    labelpic.setIcon(i);
-                } catch (IOException | SQLException e) {
-                    JOptionPane.showMessageDialog(this, "Picture Not Found", "Error To Get Picture", JOptionPane.ERROR_MESSAGE);
+                    InputStream inst = DBclass.rs.getBinaryStream("ProfilePicture");
+                    Image im = ImageIO.read(inst);
+                    labelpic.setIcon(new ImageIcon(im.getScaledInstance(labelpic.getWidth(), labelpic.getHeight(), Image.SCALE_SMOOTH)));
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, "Error In Label Picture", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 txtRegistration.setText(DBclass.rs.getString("Registration"));
                 txtStudentName.setText(DBclass.rs.getString("StudentName"));
@@ -222,28 +216,7 @@ public class AddStudent extends javax.swing.JFrame {
             table();
         }
     }
-
-    private void profilePicture(String registration) {
-        String reg = registration;
-        try {
-            DBclass.createCon();
-            String query = "SELECT ProfilePicture FROM Student WHERE Registration = '" + reg + "'";
-            DBclass.pst = DBclass.con.prepareStatement(query);
-            DBclass.rs = DBclass.pst.executeQuery();
-            while (DBclass.rs.next()) {
-                try {
-                    InputStream inst = DBclass.rs.getBinaryStream(1);
-                    Image im = ImageIO.read(inst);
-                    labelpic.setIcon(new ImageIcon(im.getScaledInstance(labelpic.getWidth(), labelpic.getHeight(), Image.SCALE_SMOOTH)));
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(this, "Error In Label Picture", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Picture Not Found", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -268,20 +241,17 @@ public class AddStudent extends javax.swing.JFrame {
         txtSession = new javax.swing.JTextField();
         txtPhoneNumber = new javax.swing.JTextField();
         labelpic = new javax.swing.JLabel();
-        btnAttachImage = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         studentTable = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         btnReset = new javax.swing.JButton();
-        btnSave = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
+        btnRemove = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtJoiningDate = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Add Student");
+        setTitle("Remove Student");
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 formMouseDragged(evt);
@@ -341,17 +311,6 @@ public class AddStudent extends javax.swing.JFrame {
         labelpic.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         labelpic.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnAttachImage.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        btnAttachImage.setText("Attach Image");
-        btnAttachImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAttachImageActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        jLabel8.setText("Book Image");
-
         studentTable.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         studentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -386,19 +345,11 @@ public class AddStudent extends javax.swing.JFrame {
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        btnSave.setText("Insert Student");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
+        btnRemove.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnRemove.setText("Remove Student");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
-
-        btnUpdate.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        btnUpdate.setText("Update Student");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
+                btnRemoveActionPerformed(evt);
             }
         });
 
@@ -420,7 +371,6 @@ public class AddStudent extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel8)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
@@ -430,21 +380,19 @@ public class AddStudent extends javax.swing.JFrame {
                             .addComponent(txtPhoneNumber)
                             .addComponent(txtSession)
                             .addComponent(txtBatch)
-                            .addComponent(btnAttachImage)
                             .addComponent(txtJoiningDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtRegistration, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
-                            .addComponent(txtStudentName)
-                            .addComponent(txtDepartment)
-                            .addComponent(txtRoll)))
+                            .addComponent(txtRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(151, 151, 151)
                         .addComponent(labelpic, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(btnSave)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnUpdate)))
-                .addGap(25, 25, 25)
+                        .addGap(160, 160, 160)
+                        .addComponent(btnRemove))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtDepartment, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                        .addComponent(txtStudentName, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtRoll)))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
@@ -452,13 +400,10 @@ public class AddStudent extends javax.swing.JFrame {
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(btnReset)
-                        .addGap(264, 264, 264))
+                        .addGap(269, 269, 269))
                     .addComponent(jScrollPane1))
                 .addGap(20, 20, 20))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSave, btnUpdate});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -466,11 +411,7 @@ public class AddStudent extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelpic, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAttachImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(19, 19, 19)
+                        .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -505,9 +446,7 @@ public class AddStudent extends javax.swing.JFrame {
                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                             .addComponent(txtJoiningDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSave)
-                            .addComponent(btnUpdate)))
+                        .addComponent(btnRemove))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -518,8 +457,6 @@ public class AddStudent extends javax.swing.JFrame {
                         .addComponent(jScrollPane1)))
                 .addGap(25, 25, 25))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnSave, btnUpdate});
 
         pack();
         setLocationRelativeTo(null);
@@ -576,37 +513,6 @@ public class AddStudent extends javax.swing.JFrame {
         }
         return i;
     }
-    private void btnAttachImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttachImageActionPerformed
-        int i = selectAndCreate();
-        if (i == JFileChooser.APPROVE_OPTION) {
-            if (fi.isFile()) {
-                filename = fi.getAbsolutePath();
-                try {
-                    pic = new FileInputStream(filename);
-                } catch (FileNotFoundException e) {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Picture Not Found", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                ImageIcon im = new ImageIcon(filename);
-                Image iimage = im.getImage();
-                Image newImage = iimage.getScaledInstance(labelpic.getWidth(), labelpic.getHeight(), Image.SCALE_SMOOTH);
-                ImageIcon imicon = new ImageIcon(newImage);
-                labelpic.setIcon(imicon);
-                try {
-                    File image = new File(filename);
-                    FileInputStream fs = new FileInputStream(image);
-                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    byte[] buf = new byte[1024];
-                    for (int readNum; (readNum = fs.read(buf)) != -1;) {
-                        bos.write(buf, 0, readNum);
-                    }
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(null, e);
-                }
-            }
-        }
-        fi.delete();
-    }//GEN-LAST:event_btnAttachImageActionPerformed
-
     private void txtRollKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRollKeyTyped
         char c = evt.getKeyChar();
         if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE)) {
@@ -615,104 +521,45 @@ public class AddStudent extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtRollKeyTyped
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        if (labelpic.getIcon() == null || txtStudentName.getText().equals("") || txtDepartment.getText().equals("") || txtRoll.getText().equals("") || txtRegistration.getText().equals("") || txtBatch.getText().equals("") || txtSession.getText().equals("") || txtPhoneNumber.getText().equals("") || txtJoiningDate.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "All Fields Are Required", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-                String registration = txtRegistration.getText();
-
-                DBclass.createCon();
-                String query = "SELECT Registration FROM Student WHERE Registration = '" + registration + "'";
-                DBclass.pst = DBclass.con.prepareStatement(query);
-                DBclass.rs = DBclass.pst.executeQuery();
-                if (DBclass.rs.next()) {
-                    JOptionPane.showMessageDialog(this, "The Student Already Registered", "Information Message", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    DBclass.createCon();
-                    String studentInsert = "INSERT INTO Student (Registration, ProfilePicture, StudentName, Department, Roll, Batch, Session, PhoneNumber, JoiningDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                    DBclass.pst = DBclass.con.prepareStatement(studentInsert);
-
-                    DBclass.pst.setString(1, txtRegistration.getText());
-                    try {
-                        DBclass.pst.setBinaryStream(2, pic, pic.available());
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(this, "Picture Didn't Entered", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                    DBclass.pst.setString(3, txtStudentName.getText());
-                    DBclass.pst.setString(4, txtDepartment.getText());
-                    DBclass.pst.setString(5, txtRoll.getText());
-                    DBclass.pst.setString(6, txtBatch.getText());
-                    DBclass.pst.setString(7, txtSession.getText());
-                    DBclass.pst.setString(8, txtPhoneNumber.getText());
-                    java.sql.Date date = new java.sql.Date(txtJoiningDate.getDate().getTime());
-                    DBclass.pst.setDate(9, date);
-
-                    DBclass.pst.executeUpdate();
-                    table();
-                    JOptionPane.showMessageDialog(this, "Student Successfully Registered", "Information Message", JOptionPane.INFORMATION_MESSAGE);
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(AddStudent.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_btnSaveActionPerformed
-
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
         String registration = txtSearch.getText();
         searchFetch(registration);
     }//GEN-LAST:event_txtSearchKeyReleased
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        if (txtStudentName.getText().equals("") || txtDepartment.getText().equals("") || txtRoll.getText().equals("") || txtRegistration.getText().equals("") || txtBatch.getText().equals("") || txtSession.getText().equals("") || txtPhoneNumber.getText().equals("") || txtJoiningDate.getDate() == null) {
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        if (labelpic.getIcon() == null || txtRegistration.getText().equals("") || txtStudentName.getText().equals("") || txtDepartment.getText().equals("") || txtRoll.getText().equals("") || txtRegistration.getText().equals("") || txtBatch.getText().equals("") || txtSession.getText().equals("") || txtPhoneNumber.getText().equals("") || txtJoiningDate.getDate() == null) {
             JOptionPane.showMessageDialog(this, "All Fields Are Required", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            try {
-                String registration = txtRegistration.getText();
+            int a = JOptionPane.showConfirmDialog(this, "Do you want to Remove Student?", "Remove Student", JOptionPane.YES_NO_CANCEL_OPTION);
+            if (a == 0) {
+                try {
+                    String registration = txtRegistration.getText();
 
-                DBclass.createCon();
-                String query = "UPDATE Student SET StudentName = ?, Department = ?, Roll = ?, Batch = ?, Session = ?, PhoneNumber = ?, JoiningDate = ? WHERE Registration = " + registration;
-                DBclass.pst = DBclass.con.prepareStatement(query);
-
-                if (DBclass.rs.next()) {
-                    DBclass.pst.setString(1, txtRegistration.getText());
-                    try {
-                        DBclass.pst.setBinaryStream(2, pic, pic.available());
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(this, "Picture Didn't Entered", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                    DBclass.pst.setString(3, txtStudentName.getText());
-                    DBclass.pst.setString(4, txtDepartment.getText());
-                    int roll = Integer.valueOf(txtRoll.getText());
-                    DBclass.pst.setInt(5, roll);
-                    DBclass.pst.setString(6, txtBatch.getText());
-                    DBclass.pst.setString(7, txtSession.getText());
-                    DBclass.pst.setString(8, txtPhoneNumber.getText());
-                    java.sql.Date date = new java.sql.Date(txtJoiningDate.getDate().getTime());
-                    DBclass.pst.setDate(9, date);
-
-                    int k = DBclass.pst.executeUpdate();
-                    if (k != 0) {
-                        table();
-                        JOptionPane.showMessageDialog(this, "Successfully Updated");
+                    DBclass.createCon();
+                    String query = "SELECT * FROM IssueBook WHERE StudentId = '" + registration + "'";
+                    DBclass.pst = DBclass.con.prepareStatement(query);
+                    DBclass.rs = DBclass.pst.executeQuery();
+                    if (DBclass.rs.next()) {
+                        JOptionPane.showMessageDialog(this, "Book Found. Return The Issued Book First", "Can't Remove Student", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(this, "Not Updated", "Error", JOptionPane.ERROR_MESSAGE);
+                        String query2 = "DELETE FROM Student WHERE Registration = " + registration;
+                        DBclass.pst = DBclass.con.prepareStatement(query2);
+                        DBclass.pst.executeUpdate();
+                        table();
+                        JOptionPane.showMessageDialog(this, "Succesfully Removed", "Student Deleted", JOptionPane.INFORMATION_MESSAGE);
                     }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Student Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "Student Is Not Removed", "Not Deleted", JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(AddStudent.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void studentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_studentTableMouseClicked
         //get values from jTable to components by mouse clicked
         int i = studentTable.getSelectedRow();
         String registration = studentTable.getValueAt(i, 0).toString();
         txtRegistration.setText(registration);
-        profilePicture(registration);
         txtStudentName.setText(studentTable.getValueAt(i, 1).toString());
         txtDepartment.setText(studentTable.getValueAt(i, 2).toString());
         txtRoll.setText(studentTable.getValueAt(i, 3).toString());
@@ -760,7 +607,7 @@ public class AddStudent extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RemoveStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         try {
@@ -769,15 +616,13 @@ public class AddStudent extends javax.swing.JFrame {
         }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new AddStudent().setVisible(true);
+            new RemoveStudent().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAttachImage;
+    private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnReset;
-    private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -786,7 +631,6 @@ public class AddStudent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelpic;

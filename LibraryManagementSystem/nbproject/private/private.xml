@@ -5,6 +5,9 @@
         <group>
             <file>file:/My%20files/GitHub/Java-Swing-Applications/LibraryManagementSystem/src/librarymanagementsystem/IssueBook.java</file>
             <file>file:/My%20files/GitHub/Java-Swing-Applications/LibraryManagementSystem/src/librarymanagementsystem/Dashboard.java</file>
+            <file>file:/My%20files/GitHub/Java-Swing-Applications/LibraryManagementSystem/src/librarymanagementsystem/DeleteBook.java</file>
+            <file>file:/My%20files/GitHub/Java-Swing-Applications/LibraryManagementSystem/src/librarymanagementsystem/RemoveStudent.java</file>
+            <file>file:/My%20files/GitHub/Java-Swing-Applications/LibraryManagementSystem/src/librarymanagementsystem/AddStudent.java</file>
             <file>file:/My%20files/GitHub/Java-Swing-Applications/LibraryManagementSystem/src/librarymanagementsystem/AddBook.java</file>
         </group>
     </open-files>

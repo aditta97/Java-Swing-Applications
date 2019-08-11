@@ -331,7 +331,7 @@ public final class AddBook extends javax.swing.JFrame {
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(btnReset)
-                        .addGap(0, 301, Short.MAX_VALUE))
+                        .addGap(301, 301, 301))
                     .addComponent(jScrollPane1))
                 .addGap(20, 20, 20))
         );

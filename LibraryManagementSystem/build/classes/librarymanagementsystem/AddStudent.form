@@ -50,28 +50,24 @@
                           <Component id="txtBatch" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnAttachImage" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="txtJoiningDate" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtRegistration" alignment="0" min="-2" pref="291" max="-2" attributes="0"/>
+                          <Component id="txtRegistration" alignment="0" pref="291" max="32767" attributes="0"/>
+                          <Component id="txtStudentName" max="32767" attributes="0"/>
+                          <Component id="txtDepartment" max="32767" attributes="0"/>
+                          <Component id="txtRoll" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
                       <Component id="labelpic" min="-2" pref="180" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                       <Component id="btnSave" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="btnUpdate" linkSize="1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="btnRemove" linkSize="1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="txtDepartment" alignment="0" pref="289" max="32767" attributes="0"/>
-                      <Component id="txtStudentName" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtRoll" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+              <EmptySpace min="25" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
@@ -79,7 +75,7 @@
                       <Component id="txtSearch" min="-2" pref="255" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="btnReset" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="333" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="264" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
@@ -146,17 +142,15 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnSave" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnUpdate" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnRemove" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                              <Component id="btnReset" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel9" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Component id="btnReset" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="txtSearch" alignment="1" min="-2" pref="29" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtSearch" alignment="1" min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
@@ -254,9 +248,6 @@
           <Font name="Monaco" size="14" style="0"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRegistrationKeyReleased"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtBatch">
       <Properties>
@@ -326,7 +317,7 @@
               <Font name="Monaco" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="8" rowCount="0">
+              <Table columnCount="9" rowCount="0">
                 <Column editable="true" title="Registration" type="java.lang.Object"/>
                 <Column editable="true" title="Student Name" type="java.lang.Object"/>
                 <Column editable="true" title="Department" type="java.lang.Object"/>
@@ -335,10 +326,16 @@
                 <Column editable="true" title="Session" type="java.lang.Object"/>
                 <Column editable="true" title="Phone Number" type="java.lang.Object"/>
                 <Column editable="true" title="Joining date" type="java.lang.Object"/>
+                <Column editable="true" title="Sekect Student" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -396,7 +393,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Search"/>
+        <Property name="text" type="java.lang.String" value="Search Student"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtSearch">
@@ -425,7 +422,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Save"/>
+        <Property name="text" type="java.lang.String" value="Insert Student"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
@@ -436,21 +433,10 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Monaco" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Update"/>
+        <Property name="text" type="java.lang.String" value="Update Student"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnRemove">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Monaco" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Remove"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoveActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">

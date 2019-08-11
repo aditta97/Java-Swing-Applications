@@ -251,7 +251,7 @@ public final class DeleteBook extends javax.swing.JFrame {
         jScrollPane1.setViewportView(bookTable);
 
         jLabel9.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        jLabel9.setText("Search Book Name");
+        jLabel9.setText("Search Book");
 
         txtSearch.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -280,9 +280,6 @@ public final class DeleteBook extends javax.swing.JFrame {
         txtBookId.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtBookIdKeyTyped(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtBookIdKeyReleased(evt);
             }
         });
 
@@ -330,7 +327,7 @@ public final class DeleteBook extends javax.swing.JFrame {
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(btnReset)
-                        .addGap(0, 261, Short.MAX_VALUE))
+                        .addGap(261, 261, 261))
                     .addComponent(jScrollPane1))
                 .addGap(20, 20, 20))
         );
@@ -413,7 +410,7 @@ public final class DeleteBook extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPriceKeyTyped
 
     private void btnDeleteBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteBookActionPerformed
-        if (labelpic.getIcon() == null || txtBookName.getText().equals("") || txtWriterName.getText().equals("") || txtEdition.getText().equals("") || txtQuantity.getText().equals("") || txtPublisher.getText().equals("") || txtPages.getText().equals("") || txtPrice.getText().equals("")) {
+        if (labelpic.getIcon() == null || txtBookId.getText().equals("") || txtBookName.getText().equals("") || txtWriterName.getText().equals("") || txtEdition.getText().equals("") || txtQuantity.getText().equals("") || txtPublisher.getText().equals("") || txtPages.getText().equals("") || txtPrice.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "All Fields Are Required", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             int a = JOptionPane.showConfirmDialog(this, "Do you want to Delete?", "Delete Student", JOptionPane.YES_NO_CANCEL_OPTION);
@@ -509,67 +506,6 @@ public final class DeleteBook extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtPagesKeyTyped
-    private void search(int bId) {
-        int bookId = bId;
-        
-        DefaultTableModel tableModel = new DefaultTableModel();
-        String columnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price", "Remove Book"};
-        tableModel.setColumnIdentifiers(columnNames);
-        
-        try {
-            DBclass.createCon();
-            String query = "SELECT Id, BookName, WriterName, Edition, Quantity, Publisher, Pages, Price FROM Book WHERE Id = " + bookId;
-            DBclass.pst = DBclass.con.prepareStatement(query);
-            DBclass.rs = DBclass.pst.executeQuery();
-            while (DBclass.rs.next()) {
-                int id = DBclass.rs.getInt(1);
-                String name = DBclass.rs.getString(2);
-                String writerName = DBclass.rs.getString(3);
-                String edition = DBclass.rs.getString(4);
-                int quantity = DBclass.rs.getInt(5);
-                String publisher = DBclass.rs.getString(6);
-                int pages = DBclass.rs.getInt(7);
-                int price = DBclass.rs.getInt(8);
-                
-                Object[] row = new Object[9];
-                row[0] = id;
-                row[1] = name;
-                row[2] = writerName;
-                row[3] = edition;
-                row[4] = quantity;
-                row[5] = publisher;
-                row[6] = pages;
-                row[7] = price;
-                row[8] = "Remove";
-                
-                tableModel.addRow(row);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        
-        bookTable.setModel(tableModel);
-        
-        Action doSomething = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //JTable table = (JTable) e.getSource();
-                int row = Integer.valueOf(e.getActionCommand());
-                bookTable.getSelectionModel().addSelectionInterval(row, row);
-                DefaultTableModel model = (DefaultTableModel) bookTable.getModel();
-                int rowIndex = bookTable.getSelectedRow();
-                
-                bookTable((int) model.getValueAt(rowIndex, 0)); //Book Id
-            }
-        };
-        
-        TableButton tableButton = new TableButton(bookTable, doSomething, 8);
-    }
-    private void txtBookIdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBookIdKeyReleased
-        String search = txtBookId.getText();
-        int id = Integer.parseInt(search);
-        search(id);
-    }//GEN-LAST:event_txtBookIdKeyReleased
 
     private void txtBookIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBookIdKeyTyped
         char c = evt.getKeyChar();

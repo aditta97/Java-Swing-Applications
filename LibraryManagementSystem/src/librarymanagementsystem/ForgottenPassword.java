@@ -6,12 +6,7 @@
 package librarymanagementsystem;
 
 import java.awt.Toolkit;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -24,11 +19,6 @@ public final class ForgottenPassword extends javax.swing.JFrame {
 
     int xMouse;
     int yMouse;
-
-    Connection con = null;
-    PreparedStatement pst = null;
-    Statement st = null;
-    ResultSet rs = null;
 
     /**
      * Creates new form ForgottenPassword
@@ -201,15 +191,15 @@ public final class ForgottenPassword extends javax.swing.JFrame {
                 String sqa = txtSecurityQuestionAnswer.getText();
                 DBclass.createCon();
                 String query = "SELECT SecurityQuestion, SecurityAnswer, Password FROM Registration WHERE Email = '" + emailAddress.getText() + "'";
-                pst = con.prepareStatement(query);
-                rs = pst.executeQuery();
-                while (rs.next()) {
-                    String sqdb = rs.getString(1);
-                    String sqAnswer = rs.getString(2);
+                DBclass.pst = DBclass.con.prepareStatement(query);
+                DBclass.rs = DBclass.pst.executeQuery();
+                while (DBclass.rs.next()) {
+                    String sqdb = DBclass.rs.getString(1);
+                    String sqAnswer = DBclass.rs.getString(2);
                     if (sq.matches(sqdb)) {
                         if (sqa.matches(sqAnswer)) {
                             //Setting Password On The Text Field
-                            showPassword.setText(rs.getString(3));
+                            showPassword.setText(DBclass.rs.getString(3));
                         } else {
                             JOptionPane.showMessageDialog(this, "Wrong Security Answer", "Error", JOptionPane.ERROR_MESSAGE);
                         }
