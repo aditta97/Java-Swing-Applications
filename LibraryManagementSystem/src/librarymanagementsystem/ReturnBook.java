@@ -404,6 +404,15 @@ public final class ReturnBook extends javax.swing.JFrame {
             ChangeTableDateFormat();
         } else {
             table();
+
+            //For set the column width
+            TableColumnModel columnModel = returnBookTable.getColumnModel();
+            columnModel.getColumn(0).setPreferredWidth(20); //Issue Id column
+            columnModel.getColumn(3).setPreferredWidth(20); //Book Id column
+            columnModel.getColumn(9).setPreferredWidth(20); //Roll column
+            columnModel.getColumn(10).setPreferredWidth(20); //Batch column
+            columnModel.getColumn(12).setPreferredWidth(20); //Edition column
+            columnModel.getColumn(13).setPreferredWidth(40); //Remove column
         }
     }
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased

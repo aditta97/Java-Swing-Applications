@@ -38,6 +38,7 @@ import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -159,6 +160,17 @@ public class AddStudent extends javax.swing.JFrame {
 
         TableButton tableButton = new TableButton(studentTable, doSomething, 8);
         ChangeTableDateFormat();
+
+        //For set the column width
+        TableColumnModel columnModel = studentTable.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(35); //Registration
+        columnModel.getColumn(2).setPreferredWidth(40); //Department
+        columnModel.getColumn(3).setPreferredWidth(15); //Roll
+        columnModel.getColumn(4).setPreferredWidth(15); //Batch
+        columnModel.getColumn(5).setPreferredWidth(25); //Session
+        columnModel.getColumn(6).setPreferredWidth(45); //Phone Number
+        columnModel.getColumn(7).setPreferredWidth(35); //Joining Date
+        columnModel.getColumn(8).setPreferredWidth(25); //Select Student
     }
 
     //For Search button (Searching by registration)
@@ -218,8 +230,30 @@ public class AddStudent extends javax.swing.JFrame {
 
             TableButton tableButton = new TableButton(studentTable, doSomething, 8);
             ChangeTableDateFormat();
+
+            //For set the column width
+            TableColumnModel columnModel = studentTable.getColumnModel();
+            columnModel.getColumn(0).setPreferredWidth(35); //Registration
+            columnModel.getColumn(2).setPreferredWidth(40); //Department
+            columnModel.getColumn(3).setPreferredWidth(15); //Roll
+            columnModel.getColumn(4).setPreferredWidth(15); //Batch
+            columnModel.getColumn(5).setPreferredWidth(25); //Session
+            columnModel.getColumn(6).setPreferredWidth(45); //Phone Number
+            columnModel.getColumn(7).setPreferredWidth(35); //Joining Date
+            columnModel.getColumn(8).setPreferredWidth(25); //Select Student
         } else {
             table();
+
+            //For set the column width
+            TableColumnModel columnModel = studentTable.getColumnModel();
+            columnModel.getColumn(0).setPreferredWidth(35); //Registration
+            columnModel.getColumn(2).setPreferredWidth(40); //Department
+            columnModel.getColumn(3).setPreferredWidth(15); //Roll
+            columnModel.getColumn(4).setPreferredWidth(15); //Batch
+            columnModel.getColumn(5).setPreferredWidth(25); //Session
+            columnModel.getColumn(6).setPreferredWidth(45); //Phone Number
+            columnModel.getColumn(7).setPreferredWidth(35); //Joining Date
+            columnModel.getColumn(8).setPreferredWidth(25); //Select Student
         }
     }
 

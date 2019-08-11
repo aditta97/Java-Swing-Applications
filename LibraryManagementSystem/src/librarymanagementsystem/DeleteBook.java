@@ -5,33 +5,20 @@
  */
 package librarymanagementsystem;
 
-import java.awt.Color;
-import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -245,7 +232,7 @@ public final class DeleteBook extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price"
+                "Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price", "Select Book"
             }
         ));
         jScrollPane1.setViewportView(bookTable);

@@ -31,7 +31,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
-import net.proteanit.sql.DbUtils;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -135,6 +135,15 @@ public final class AddBook extends javax.swing.JFrame {
         };
 
         TableButton tableButton = new TableButton(bookTable, doSomething, 8);
+        
+        //For set the column width
+        TableColumnModel columnModel = bookTable.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(25); //Book Id
+        columnModel.getColumn(3).setPreferredWidth(25); //Edition
+        columnModel.getColumn(4).setPreferredWidth(30); //Quantity
+        columnModel.getColumn(6).setPreferredWidth(25); //Pages
+        columnModel.getColumn(7).setPreferredWidth(25); //Price
+        columnModel.getColumn(8).setPreferredWidth(30); //Select Book
     }
 
     /**
@@ -641,6 +650,15 @@ public final class AddBook extends javax.swing.JFrame {
         };
 
         TableButton tableButton = new TableButton(bookTable, doSomething, 8);
+        
+        //For set the column width
+        TableColumnModel columnModel = bookTable.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(25); //Book Id
+        columnModel.getColumn(3).setPreferredWidth(25); //Edition
+        columnModel.getColumn(4).setPreferredWidth(30); //Quantity
+        columnModel.getColumn(6).setPreferredWidth(25); //Pages
+        columnModel.getColumn(7).setPreferredWidth(25); //Price
+        columnModel.getColumn(8).setPreferredWidth(30); //Select Book
     }
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
         String search = txtSearch.getText();
