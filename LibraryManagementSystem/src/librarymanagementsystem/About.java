@@ -5,8 +5,10 @@
  */
 package librarymanagementsystem;
 
+import com.jtattoo.plaf.bernstein.BernsteinLookAndFeel;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.Properties;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -26,12 +28,12 @@ public final class About extends javax.swing.JFrame {
     public About() {
         initComponents();
         ProfileIcon();
-        //JFrameIcon();
+        JFrameIcon();
     }
     
     //Setting an Icon for jFrame
-    void JFrameIcon() {
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Meal Management System.png")));
+    private void JFrameIcon() {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Image/icons8-book_shelf.png")));
     }
     
     public void ProfileIcon() {
@@ -115,6 +117,9 @@ public final class About extends javax.swing.JFrame {
         }
         //</editor-fold>
         try {
+            Properties props = new Properties();
+            props.put("logoString", "AEC");
+            BernsteinLookAndFeel.setCurrentTheme(props);
             UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
         }

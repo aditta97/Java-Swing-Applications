@@ -5,16 +5,16 @@
  */
 package librarymanagementsystem;
 
+import com.jtattoo.plaf.bernstein.BernsteinLookAndFeel;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Properties;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -39,7 +39,13 @@ public final class IssueBook extends javax.swing.JFrame {
     public IssueBook() {
         initComponents();
         table();
+        JFrameIcon();
         issueBookTable.setRowHeight(35);
+    }
+    
+    //Setting an Icon for jFrame
+    private void JFrameIcon() {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Image/icons8-book_shelf.png")));
     }
 
     private void remainingTime(String bookName, String writerName, String edition, String publisher, int pages) {
@@ -632,6 +638,9 @@ public final class IssueBook extends javax.swing.JFrame {
         }
         //</editor-fold>
         try {
+            Properties props = new Properties();
+            props.put("logoString", "AEC");
+            BernsteinLookAndFeel.setCurrentTheme(props);
             UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
         }

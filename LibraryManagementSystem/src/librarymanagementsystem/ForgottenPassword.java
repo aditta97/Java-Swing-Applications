@@ -5,8 +5,10 @@
  */
 package librarymanagementsystem;
 
+import com.jtattoo.plaf.bernstein.BernsteinLookAndFeel;
 import java.awt.Toolkit;
 import java.sql.SQLException;
+import java.util.Properties;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -25,12 +27,12 @@ public final class ForgottenPassword extends javax.swing.JFrame {
      */
     public ForgottenPassword() {
         initComponents();
-        //JFrameIcon();
+        JFrameIcon();
     }
 
     //Setting an Icon for jFrame
-    void JFrameIcon() {
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Meal Management System.png")));
+    private void JFrameIcon() {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Image/icons8-book_shelf.png")));
     }
 
     /**
@@ -187,8 +189,8 @@ public final class ForgottenPassword extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "All Fields Are Required");
         } else {
             try {
-                String sq = securityQuestion.getSelectedItem().toString();
-                String sqa = txtSecurityQuestionAnswer.getText();
+                String sq = securityQuestion.getSelectedItem().toString(); //From Combo Box
+                String sqa = txtSecurityQuestionAnswer.getText();   //From jTextField
                 DBclass.createCon();
                 String query = "SELECT SecurityQuestion, SecurityAnswer, Password FROM Registration WHERE Email = '" + emailAddress.getText() + "'";
                 DBclass.pst = DBclass.con.prepareStatement(query);
@@ -196,14 +198,14 @@ public final class ForgottenPassword extends javax.swing.JFrame {
                 while (DBclass.rs.next()) {
                     String sqdb = DBclass.rs.getString(1);
                     String sqAnswer = DBclass.rs.getString(2);
-                    if (sq.matches(sqdb)) {
+                    if (sq.equals(sqdb)) {
                         if (sqa.matches(sqAnswer)) {
                             //Setting Password On The Text Field
                             showPassword.setText(DBclass.rs.getString(3));
                         } else {
                             JOptionPane.showMessageDialog(this, "Wrong Security Answer", "Error", JOptionPane.ERROR_MESSAGE);
                         }
-                    } else {
+                     } else {
                         JOptionPane.showMessageDialog(this, "Wrong Security Question", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
@@ -237,10 +239,12 @@ public final class ForgottenPassword extends javax.swing.JFrame {
 
         //</editor-fold>
         try {
+            Properties props = new Properties();
+            props.put("logoString", "AEC");
+            BernsteinLookAndFeel.setCurrentTheme(props);
             UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
         }
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new ForgottenPassword().setVisible(true);

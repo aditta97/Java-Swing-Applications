@@ -5,10 +5,12 @@
  */
 package librarymanagementsystem;
 
+import com.jtattoo.plaf.bernstein.BernsteinLookAndFeel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.HeadlessException;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -20,6 +22,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -51,7 +54,13 @@ public class RemoveStudent extends javax.swing.JFrame {
     public RemoveStudent() {
         initComponents();
         table();
+        JFrameIcon();
         studentTable.setRowHeight(35);
+    }
+    
+    //Setting an Icon for jFrame
+    private void JFrameIcon() {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Image/icons8-book_shelf.png")));
     }
 
     //jTable date format change
@@ -611,6 +620,9 @@ public class RemoveStudent extends javax.swing.JFrame {
         }
         //</editor-fold>
         try {
+            Properties props = new Properties();
+            props.put("logoString", "AEC");
+            BernsteinLookAndFeel.setCurrentTheme(props);
             UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
         }

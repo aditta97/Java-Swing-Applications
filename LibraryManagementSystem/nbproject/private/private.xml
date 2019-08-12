@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/My%20files/GitHub/Java-Swing-Applications/LibraryManagementSystem/src/librarymanagementsystem/IssueBook.java</file>
+            <file>file:/My%20files/GitHub/Java-Swing-Applications/LibraryManagementSystem/src/librarymanagementsystem/ForgottenPassword.java</file>
             <file>file:/My%20files/GitHub/Java-Swing-Applications/LibraryManagementSystem/src/librarymanagementsystem/Dashboard.java</file>
-            <file>file:/My%20files/GitHub/Java-Swing-Applications/LibraryManagementSystem/src/librarymanagementsystem/DeleteBook.java</file>
-            <file>file:/My%20files/GitHub/Java-Swing-Applications/LibraryManagementSystem/src/librarymanagementsystem/RemoveStudent.java</file>
-            <file>file:/My%20files/GitHub/Java-Swing-Applications/LibraryManagementSystem/src/librarymanagementsystem/AddStudent.java</file>
-            <file>file:/My%20files/GitHub/Java-Swing-Applications/LibraryManagementSystem/src/librarymanagementsystem/AddBook.java</file>
+            <file>file:/My%20files/GitHub/Java-Swing-Applications/LibraryManagementSystem/src/librarymanagementsystem/SignInSignOut.java</file>
         </group>
     </open-files>
 </project-private>

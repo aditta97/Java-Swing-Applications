@@ -5,31 +5,24 @@
  */
 package librarymanagementsystem;
 
-import java.awt.Color;
-import java.awt.Dimension;
+import com.jtattoo.plaf.bernstein.BernsteinLookAndFeel;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import javax.imageio.ImageIO;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.filechooser.FileSystemView;
-
 /**
  *
  * @author adittachakraborty
@@ -49,12 +42,12 @@ public final class SignInSignOut extends javax.swing.JFrame {
      */
     public SignInSignOut() {
         initComponents();
-        //JFrameIcon();
+        JFrameIcon();
     }
 
     //Setting an Icon for jFrame
     private void JFrameIcon() {
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Meal Management System.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Image/icons8-book_shelf.png")));
     }
 
     /**
@@ -80,9 +73,9 @@ public final class SignInSignOut extends javax.swing.JFrame {
         btnReset = new javax.swing.JButton();
         btnSignUp = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        regSecurityQustionAnswer = new javax.swing.JPasswordField();
+        securityQuestion = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
+        regSecurityAnswer = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         uniqueUsername = new javax.swing.JTextField();
@@ -159,13 +152,19 @@ public final class SignInSignOut extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         jLabel10.setText("Security Question");
 
-        jComboBox1.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "What's your favourite color?", "What's your childhood nickname?" }));
-
-        regSecurityQustionAnswer.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        securityQuestion.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        securityQuestion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "What's your favourite color?", "What's your childhood nickname?" }));
 
         jLabel11.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         jLabel11.setText("Security Answer");
+
+        regSecurityAnswer.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        regSecurityAnswer.setActionCommand("<Not Set>");
+        regSecurityAnswer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                regSecurityAnswerKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -200,8 +199,8 @@ public final class SignInSignOut extends javax.swing.JFrame {
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(regSecurityQustionAnswer)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(securityQuestion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(regSecurityAnswer))))
                 .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
@@ -230,11 +229,11 @@ public final class SignInSignOut extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(securityQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(regSecurityQustionAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(regSecurityAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReset)
@@ -380,13 +379,13 @@ public final class SignInSignOut extends javax.swing.JFrame {
         } else {
             try {
                 DBclass.createCon();
-                String query2 = "Select * from registration where username = '" + regUsername + "'";
+                String query2 = "SELECT * FROM Registration WHERE Email = '" + regEmailAddress + "'";
                 DBclass.pst=DBclass.con.prepareStatement(query2);
                 DBclass.rs=DBclass.pst.executeQuery();
                 if (DBclass.rs.next()) {
-                    JOptionPane.showMessageDialog(this, "Username already exists\nEnter unique username", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Email Already Exists\nEnter Unique Email Address", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    String query = "insert into registration (username, email, password, joiningdate, phoneNumber, usertypeId) values (?,?,?,?,?,?)";
+                    String query = "INSERT INTO Registration (username, email, password, phoneNumber, SecurityQuestion, SecurityAnswer) values (?,?,?,?,?,?)";
                     DBclass.pst = DBclass.con.prepareStatement(query);
                     if (Pattern.matches("^[a-zA-Z]+$", regUsername.getText())) {
                         //Aditta
@@ -400,6 +399,7 @@ public final class SignInSignOut extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(this, "Invalid Name", "Error", JOptionPane.ERROR_MESSAGE);
                     }
+                    
                     if (Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z]+[.]{1}+[A-Za-z]+$", regEmailAddress.getText())) {
                         //aditta87@gmail.com
                         DBclass.pst.setString(2, regEmailAddress.getText());
@@ -418,12 +418,18 @@ public final class SignInSignOut extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(this, "Invalid Email", "Error", JOptionPane.ERROR_MESSAGE);
                     }
+                    
                     if (Arrays.equals(regPassword.getPassword(), regConfirmPassword.getPassword())) {
                         DBclass.pst.setString(3, new String(regPassword.getPassword()));
                     } else {
                         JOptionPane.showMessageDialog(this, "Password Didn't Matched", "", JOptionPane.ERROR_MESSAGE);
                     }
-                    DBclass.pst.setString(5, regPhoneNumber.getText());
+                    
+                    DBclass.pst.setString(4, regPhoneNumber.getText());
+                    
+                    DBclass.pst.setString(5, securityQuestion.getSelectedItem().toString());
+                    
+                    DBclass.pst.setString(6, regSecurityAnswer.getText());
                     
                     DBclass.pst.executeUpdate();
                     
@@ -451,8 +457,7 @@ public final class SignInSignOut extends javax.swing.JFrame {
         } else {
             try {
                 DBclass.createCon();
-                //DriverManager.getConnection("jdbc:sqlite:mealDB.db", "", "");
-                String query = "SELECT * FROM registration WHERE Username=? and Password=? AND UsertypeID=?";
+                String query = "SELECT * FROM Registration WHERE Username=? and Password = ?";
                 DBclass.pst = DBclass.con.prepareStatement(query);
                 DBclass.pst.setString(1, uniqueUsername.getText());
                 DBclass.pst.setString(2, new String(password.getPassword()));
@@ -473,7 +478,7 @@ public final class SignInSignOut extends javax.swing.JFrame {
                 } else {
                     try {
                         DBclass.createCon();
-                        String query2 = "SELECT * FROM Registration WHERE Email = ? and Password = ? AND UsertypeID = ?";
+                        String query2 = "SELECT * FROM Registration WHERE Email = ? AND Password = ?";
                         DBclass.pst = DBclass.con.prepareStatement(query2);
                         
                         DBclass.pst.setString(1, uniqueUsername.getText());
@@ -548,6 +553,10 @@ public final class SignInSignOut extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_passwordFocusGained
 
+    private void regSecurityAnswerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_regSecurityAnswerKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_regSecurityAnswerKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -572,10 +581,12 @@ public final class SignInSignOut extends javax.swing.JFrame {
 
         //</editor-fold>
         try {
+            Properties props = new Properties();
+            props.put("logoString", "AEC");
+            BernsteinLookAndFeel.setCurrentTheme(props);
             UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
         }
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new SignInSignOut().setVisible(true);
@@ -589,7 +600,6 @@ public final class SignInSignOut extends javax.swing.JFrame {
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSignUp;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -606,8 +616,9 @@ public final class SignInSignOut extends javax.swing.JFrame {
     private javax.swing.JTextField regEmailAddress;
     private javax.swing.JPasswordField regPassword;
     private javax.swing.JTextField regPhoneNumber;
-    private javax.swing.JPasswordField regSecurityQustionAnswer;
+    private javax.swing.JTextField regSecurityAnswer;
     private javax.swing.JTextField regUsername;
+    private javax.swing.JComboBox<String> securityQuestion;
     private javax.swing.JTextField uniqueUsername;
     // End of variables declaration//GEN-END:variables
 }
