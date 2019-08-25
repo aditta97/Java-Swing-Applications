@@ -50,6 +50,8 @@ public class Dashboard extends javax.swing.JFrame {
         btnLogOut = new javax.swing.JButton();
         btnReturnBook = new javax.swing.JButton();
         btnDeleteBook = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -79,8 +81,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Library Management System", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Monaco", 1, 22), new java.awt.Color(0, 204, 0))); // NOI18N
 
         btnAddBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-add_book.png"))); // NOI18N
-        btnAddBook.setToolTipText("Add Book");
-        btnAddBook.setPreferredSize(new java.awt.Dimension(130, 106));
+        btnAddBook.setToolTipText("Add & Update Book");
         btnAddBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddBookActionPerformed(evt);
@@ -96,7 +97,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         btnAddStudent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-add_user_group_woman_man.png"))); // NOI18N
-        btnAddStudent.setToolTipText("Add Student");
+        btnAddStudent.setToolTipText("Add & Update Student");
         btnAddStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddStudentActionPerformed(evt);
@@ -172,11 +173,17 @@ public class Dashboard extends javax.swing.JFrame {
                         .addComponent(btnReturnBook, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDeleteBook, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRemoveStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRemoveStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeleteBook, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
+
+        jLabel1.setFont(new java.awt.Font("Monaco", 0, 12)); // NOI18N
+        jLabel1.setText("Version 1.O");
+
+        jLabel2.setFont(new java.awt.Font("Monaco", 0, 12)); // NOI18N
+        jLabel2.setText("Copyright © Aditta Chakraborty 2019");
 
         jMenu1.setText("File");
 
@@ -258,7 +265,12 @@ public class Dashboard extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(108, 108, 108)
+                        .addComponent(jLabel1))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
@@ -266,7 +278,11 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(10, 10, 10))
         );
 
         pack();
@@ -402,6 +418,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnRemoveStudent;
     private javax.swing.JButton btnReturnBook;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

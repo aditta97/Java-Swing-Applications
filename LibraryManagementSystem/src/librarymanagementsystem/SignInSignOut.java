@@ -134,6 +134,7 @@ public final class SignInSignOut extends javax.swing.JFrame {
         });
 
         btnReset.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-recurring_appointment.png"))); // NOI18N
         btnReset.setText("Reset");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +143,7 @@ public final class SignInSignOut extends javax.swing.JFrame {
         });
 
         btnSignUp.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnSignUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-thumb_up.png"))); // NOI18N
         btnSignUp.setText("Sign Up");
         btnSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,36 +173,37 @@ public final class SignInSignOut extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(124, 124, 124)
-                .addComponent(btnReset)
-                .addGap(61, 61, 61)
-                .addComponent(btnSignUp)
-                .addGap(125, 125, 125))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(regUsername)
-                            .addComponent(regEmailAddress)
-                            .addComponent(regPhoneNumber)
-                            .addComponent(regPassword)
-                            .addComponent(regConfirmPassword)))
+                        .addGap(124, 124, 124)
+                        .addComponent(btnReset)
+                        .addGap(61, 61, 61)
+                        .addComponent(btnSignUp))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(securityQuestion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(regSecurityAnswer))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(regPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                    .addComponent(regPhoneNumber, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(regEmailAddress, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(regUsername, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(regConfirmPassword)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(securityQuestion, 0, 300, Short.MAX_VALUE)
+                                    .addComponent(regSecurityAnswer))))))
                 .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
@@ -271,6 +274,7 @@ public final class SignInSignOut extends javax.swing.JFrame {
         RememberMe.setText("Remember Me (Email Login Only)");
 
         btnLogin.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-ok.png"))); // NOI18N
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,6 +283,7 @@ public final class SignInSignOut extends javax.swing.JFrame {
         });
 
         btnForgottenPassword.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnForgottenPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-show_password.png"))); // NOI18N
         btnForgottenPassword.setText("Forgotten Password");
         btnForgottenPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

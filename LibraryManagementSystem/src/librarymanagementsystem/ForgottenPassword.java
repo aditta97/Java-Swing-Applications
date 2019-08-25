@@ -80,6 +80,7 @@ public final class ForgottenPassword extends javax.swing.JFrame {
         emailAddress.setFont(new java.awt.Font("Monaco", 0, 18)); // NOI18N
 
         getPassword.setFont(new java.awt.Font("Monaco", 0, 18)); // NOI18N
+        getPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-iris_scan.png"))); // NOI18N
         getPassword.setText("Get Password");
         getPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,16 +117,13 @@ public final class ForgottenPassword extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel4))
                         .addGap(175, 175, 175))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(showPassword)
-                            .addComponent(securityQuestion, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(emailAddress, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(showPassword, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(securityQuestion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(emailAddress)
+                            .addComponent(txtSecurityQuestionAnswer))
                         .addGap(15, 15, 15))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(txtSecurityQuestionAnswer)
-                .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

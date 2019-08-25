@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -209,6 +210,13 @@ public final class IssueBook extends javax.swing.JFrame {
         };
 
         TableButton tableButton = new TableButton(issueBookTable, doSomething, 6);
+        
+        //For set the column width
+        TableColumnModel columnModel = issueBookTable.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(25); //Book Id
+        columnModel.getColumn(3).setPreferredWidth(35); //Writer Name
+        columnModel.getColumn(5).setPreferredWidth(35); //Pages
+        columnModel.getColumn(6).setPreferredWidth(35); //Select
     }
 
     /**
@@ -324,7 +332,7 @@ public final class IssueBook extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "Book Id", "Book Name", "Writer Name", "Edition", "Publisher", "Pages"
             }
         ));
         jScrollPane1.setViewportView(issueBookTable);
@@ -340,6 +348,7 @@ public final class IssueBook extends javax.swing.JFrame {
         });
 
         btnReset.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-recurring_appointment.png"))); // NOI18N
         btnReset.setText("Reset");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -610,6 +619,13 @@ public final class IssueBook extends javax.swing.JFrame {
         };
 
         TableButton tableButton = new TableButton(issueBookTable, doSomething, 6);
+        
+        //For set the column width
+        TableColumnModel columnModel = issueBookTable.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(25); //Book Id
+        columnModel.getColumn(3).setPreferredWidth(35); //Writer Name
+        columnModel.getColumn(5).setPreferredWidth(35); //Pages
+        columnModel.getColumn(6).setPreferredWidth(35); //Select
     }
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
         String search = txtSearch.getText();

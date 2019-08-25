@@ -21,9 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,7 +60,7 @@ public class AddStudent extends javax.swing.JFrame {
         JFrameIcon();
         studentTable.setRowHeight(35);
     }
-    
+
     //Setting an Icon for jFrame
     private void JFrameIcon() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Image/icons8-book_shelf.png")));
@@ -117,7 +115,7 @@ public class AddStudent extends javax.swing.JFrame {
 
     private void table() {
         DefaultTableModel tableModel = new DefaultTableModel();
-        String columnNames[] = {"Registration", "Student Name", "Department", "Roll", "Batch", "Session", "Phone Number", "Joining Date", "Select Student"};
+        String columnNames[] = {"Registration", "Student Name", "Department", "Roll", "Batch", "Session", "Phone Number", "Joining Date", "Select"};
         tableModel.setColumnIdentifiers(columnNames);
 
         try {
@@ -172,14 +170,14 @@ public class AddStudent extends javax.swing.JFrame {
 
         //For set the column width
         TableColumnModel columnModel = studentTable.getColumnModel();
-        columnModel.getColumn(0).setPreferredWidth(35); //Registration
-        columnModel.getColumn(2).setPreferredWidth(40); //Department
-        columnModel.getColumn(3).setPreferredWidth(15); //Roll
-        columnModel.getColumn(4).setPreferredWidth(15); //Batch
+        columnModel.getColumn(0).setPreferredWidth(70); //Registration
+        columnModel.getColumn(2).setPreferredWidth(25); //Department
+        columnModel.getColumn(3).setPreferredWidth(25); //Roll
+        columnModel.getColumn(4).setPreferredWidth(25); //Batch
         columnModel.getColumn(5).setPreferredWidth(25); //Session
-        columnModel.getColumn(6).setPreferredWidth(45); //Phone Number
-        columnModel.getColumn(7).setPreferredWidth(35); //Joining Date
-        columnModel.getColumn(8).setPreferredWidth(25); //Select Student
+        //columnModel.getColumn(6).setPreferredWidth(55); //Phone Number
+        columnModel.getColumn(7).setPreferredWidth(55); //Joining Date
+        columnModel.getColumn(8).setPreferredWidth(35); //Select Student
     }
 
     //For Search button (Searching by registration)
@@ -187,7 +185,7 @@ public class AddStudent extends javax.swing.JFrame {
         String search = registration;
         if (!txtSearch.getText().isEmpty()) {
             DefaultTableModel tableModel = new DefaultTableModel();
-            String columnNames[] = {"Registration", "Student Name", "Department", "Roll", "Batch", "Session", "Phone Number", "Joining Date", "Select Student"};
+            String columnNames[] = {"Registration", "Student Name", "Department", "Roll", "Batch", "Session", "Phone Number", "Joining Date", "Select"};
             tableModel.setColumnIdentifiers(columnNames);
 
             try {
@@ -242,27 +240,16 @@ public class AddStudent extends javax.swing.JFrame {
 
             //For set the column width
             TableColumnModel columnModel = studentTable.getColumnModel();
-            columnModel.getColumn(0).setPreferredWidth(35); //Registration
-            columnModel.getColumn(2).setPreferredWidth(40); //Department
-            columnModel.getColumn(3).setPreferredWidth(15); //Roll
-            columnModel.getColumn(4).setPreferredWidth(15); //Batch
+            columnModel.getColumn(0).setPreferredWidth(70); //Registration
+            columnModel.getColumn(2).setPreferredWidth(25); //Department
+            columnModel.getColumn(3).setPreferredWidth(25); //Roll
+            columnModel.getColumn(4).setPreferredWidth(25); //Batch
             columnModel.getColumn(5).setPreferredWidth(25); //Session
-            columnModel.getColumn(6).setPreferredWidth(45); //Phone Number
-            columnModel.getColumn(7).setPreferredWidth(35); //Joining Date
-            columnModel.getColumn(8).setPreferredWidth(25); //Select Student
+            //columnModel.getColumn(6).setPreferredWidth(55); //Phone Number
+            columnModel.getColumn(7).setPreferredWidth(55); //Joining Date
+            columnModel.getColumn(8).setPreferredWidth(35); //Select Student
         } else {
             table();
-
-            //For set the column width
-            TableColumnModel columnModel = studentTable.getColumnModel();
-            columnModel.getColumn(0).setPreferredWidth(35); //Registration
-            columnModel.getColumn(2).setPreferredWidth(40); //Department
-            columnModel.getColumn(3).setPreferredWidth(15); //Roll
-            columnModel.getColumn(4).setPreferredWidth(15); //Batch
-            columnModel.getColumn(5).setPreferredWidth(25); //Session
-            columnModel.getColumn(6).setPreferredWidth(45); //Phone Number
-            columnModel.getColumn(7).setPreferredWidth(35); //Joining Date
-            columnModel.getColumn(8).setPreferredWidth(25); //Select Student
         }
     }
 
@@ -385,6 +372,7 @@ public class AddStudent extends javax.swing.JFrame {
         labelpic.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnAttachImage.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnAttachImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-attach.png"))); // NOI18N
         btnAttachImage.setText("Attach Image");
         btnAttachImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -404,11 +392,6 @@ public class AddStudent extends javax.swing.JFrame {
                 "Registration", "Student Name", "Department", "Roll", "Batch", "Session", "Phone Number", "Joining date", "Sekect Student"
             }
         ));
-        studentTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                studentTableMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(studentTable);
 
         jLabel9.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
@@ -422,6 +405,7 @@ public class AddStudent extends javax.swing.JFrame {
         });
 
         btnReset.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-recurring_appointment.png"))); // NOI18N
         btnReset.setText("Reset");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -430,6 +414,7 @@ public class AddStudent extends javax.swing.JFrame {
         });
 
         btnSave.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-save.png"))); // NOI18N
         btnSave.setText("Insert Student");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -438,6 +423,7 @@ public class AddStudent extends javax.swing.JFrame {
         });
 
         btnUpdate.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-approve_and_update.png"))); // NOI18N
         btnUpdate.setText("Update Student");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -455,7 +441,7 @@ public class AddStudent extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,11 +469,11 @@ public class AddStudent extends javax.swing.JFrame {
                         .addGap(151, 151, 151)
                         .addComponent(labelpic, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
+                        .addGap(50, 50, 50)
                         .addComponent(btnSave)
-                        .addGap(40, 40, 40)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addComponent(btnUpdate)))
-                .addGap(25, 25, 25)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
@@ -749,27 +735,6 @@ public class AddStudent extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
-
-    private void studentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_studentTableMouseClicked
-        //get values from jTable to components by mouse clicked
-        int i = studentTable.getSelectedRow();
-        String registration = studentTable.getValueAt(i, 0).toString();
-        txtRegistration.setText(registration);
-        profilePicture(registration);
-        txtStudentName.setText(studentTable.getValueAt(i, 1).toString());
-        txtDepartment.setText(studentTable.getValueAt(i, 2).toString());
-        txtRoll.setText(studentTable.getValueAt(i, 3).toString());
-        txtBatch.setText(studentTable.getValueAt(i, 4).toString());
-        txtSession.setText(studentTable.getValueAt(i, 5).toString());
-        txtPhoneNumber.setText(studentTable.getValueAt(i, 6).toString());
-        String date = studentTable.getValueAt(i, 7).toString();
-        try {
-            Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-            txtJoiningDate.setDate(date1);
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(this, "Error In Table For Mouse Clicked", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_studentTableMouseClicked
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         table();

@@ -46,7 +46,7 @@ public final class ReturnBook extends javax.swing.JFrame {
         JFrameIcon();
         returnBookTable.setRowHeight(35);
     }
-    
+
     //Setting an Icon for jFrame
     private void JFrameIcon() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Image/icons8-book_shelf.png")));
@@ -202,13 +202,16 @@ public final class ReturnBook extends javax.swing.JFrame {
         Action doSomething = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //JTable table = (JTable) e.getSource();
-                int row = Integer.valueOf(e.getActionCommand());
-                returnBookTable.getSelectionModel().addSelectionInterval(row, row);
-                DefaultTableModel model = (DefaultTableModel) returnBookTable.getModel();
-                int rowIndex = returnBookTable.getSelectedRow();
+                int a = JOptionPane.showConfirmDialog(null, "Accepting Issued Book?", "Return Book", JOptionPane.YES_NO_CANCEL_OPTION);
+                if (a == 0) {
+                    //JTable table = (JTable) e.getSource();
+                    int row = Integer.valueOf(e.getActionCommand());
+                    returnBookTable.getSelectionModel().addSelectionInterval(row, row);
+                    DefaultTableModel model = (DefaultTableModel) returnBookTable.getModel();
+                    int rowIndex = returnBookTable.getSelectedRow();
 
-                returnIssuedBook((int) model.getValueAt(rowIndex, 0)); //Issue Id;
+                    returnIssuedBook((int) model.getValueAt(rowIndex, 0)); //Issue Id;
+                }
             }
         };
 
@@ -256,7 +259,7 @@ public final class ReturnBook extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Issue Id", "Student Id", "Student Name", "Book Id", "Book Name", "Writer Name", "Return Date", "Remaining Time", "Department", "Roll", "Batch", "Phone Number", "Edition"
+                "Issue Id", "Student Id", "Student Name", "Book Id", "Book Name", "Writer Name", "Return Date", "Remaining Time", "Department", "Roll", "Batch", "Phone Number", "Edition", "Return"
             }
         ));
         jScrollPane1.setViewportView(returnBookTable);
@@ -272,6 +275,7 @@ public final class ReturnBook extends javax.swing.JFrame {
         });
 
         btnReset.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-recurring_appointment.png"))); // NOI18N
         btnReset.setText("Reset");
         btnReset.setPreferredSize(new java.awt.Dimension(74, 30));
         btnReset.addActionListener(new java.awt.event.ActionListener() {
@@ -292,7 +296,7 @@ public final class ReturnBook extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1207, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -399,13 +403,16 @@ public final class ReturnBook extends javax.swing.JFrame {
             Action doSomething = new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    //JTable table = (JTable) e.getSource();
-                    int row = Integer.valueOf(e.getActionCommand());
-                    returnBookTable.getSelectionModel().addSelectionInterval(row, row);
-                    DefaultTableModel model = (DefaultTableModel) returnBookTable.getModel();
-                    int rowIndex = returnBookTable.getSelectedRow();
+                    int a = JOptionPane.showConfirmDialog(null, "Accepting Issued Book?", "Return Book", JOptionPane.YES_NO_CANCEL_OPTION);
+                    if (a == 0) {
+                        //JTable table = (JTable) e.getSource();
+                        int row = Integer.valueOf(e.getActionCommand());
+                        returnBookTable.getSelectionModel().addSelectionInterval(row, row);
+                        DefaultTableModel model = (DefaultTableModel) returnBookTable.getModel();
+                        int rowIndex = returnBookTable.getSelectedRow();
 
-                    returnIssuedBook((int) model.getValueAt(rowIndex, 0)); //Issue Id;
+                        returnIssuedBook((int) model.getValueAt(rowIndex, 0)); //Issue Id;
+                    }
                 }
             };
 

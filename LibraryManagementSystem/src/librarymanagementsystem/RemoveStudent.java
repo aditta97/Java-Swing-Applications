@@ -19,9 +19,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Properties;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
@@ -37,6 +35,7 @@ import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -57,7 +56,7 @@ public class RemoveStudent extends javax.swing.JFrame {
         JFrameIcon();
         studentTable.setRowHeight(35);
     }
-    
+
     //Setting an Icon for jFrame
     private void JFrameIcon() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Image/icons8-book_shelf.png")));
@@ -110,7 +109,7 @@ public class RemoveStudent extends javax.swing.JFrame {
 
     private void table() {
         DefaultTableModel tableModel = new DefaultTableModel();
-        String columnNames[] = {"Registration", "Student Name", "Department", "Roll", "Batch", "Session", "Phone Number", "Joining Date", "Select Student"};
+        String columnNames[] = {"Registration", "Student Name", "Dept", "Roll", "Batch", "Session", "Phone Number", "Joining Date", "Select"};
         tableModel.setColumnIdentifiers(columnNames);
 
         try {
@@ -162,6 +161,16 @@ public class RemoveStudent extends javax.swing.JFrame {
 
         TableButton tableButton = new TableButton(studentTable, doSomething, 8);
         ChangeTableDateFormat();
+
+        //For set the column width
+        TableColumnModel columnModel = studentTable.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(70); //Registration
+        columnModel.getColumn(2).setPreferredWidth(25); //Department
+        columnModel.getColumn(3).setPreferredWidth(25); //Roll
+        columnModel.getColumn(4).setPreferredWidth(25); //Batch
+        columnModel.getColumn(5).setPreferredWidth(25); //Session
+        columnModel.getColumn(7).setPreferredWidth(55); //Joining Date
+        columnModel.getColumn(8).setPreferredWidth(35); //Select Student
     }
 
     //For Search button (Searching by registration)
@@ -169,7 +178,7 @@ public class RemoveStudent extends javax.swing.JFrame {
         String search = registration;
         if (!txtSearch.getText().isEmpty()) {
             DefaultTableModel tableModel = new DefaultTableModel();
-            String columnNames[] = {"Registration", "Student Name", "Department", "Roll", "Batch", "Session", "Phone Number", "Joining Date", "Select Student"};
+            String columnNames[] = {"Registration", "Student Name", "Dept", "Roll", "Batch", "Session", "Phone Number", "Joining Date", "Select"};
             tableModel.setColumnIdentifiers(columnNames);
 
             try {
@@ -221,11 +230,21 @@ public class RemoveStudent extends javax.swing.JFrame {
 
             TableButton tableButton = new TableButton(studentTable, doSomething, 8);
             ChangeTableDateFormat();
+
+            //For set the column width
+            TableColumnModel columnModel = studentTable.getColumnModel();
+            columnModel.getColumn(0).setPreferredWidth(70); //Registration
+            columnModel.getColumn(2).setPreferredWidth(25); //Department
+            columnModel.getColumn(3).setPreferredWidth(25); //Roll
+            columnModel.getColumn(4).setPreferredWidth(25); //Batch
+            columnModel.getColumn(5).setPreferredWidth(25); //Session
+            columnModel.getColumn(7).setPreferredWidth(55); //Joining Date
+            columnModel.getColumn(8).setPreferredWidth(35); //Select Student
         } else {
             table();
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -326,14 +345,9 @@ public class RemoveStudent extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Registration", "Student Name", "Department", "Roll", "Batch", "Session", "Phone Number", "Joining date", "Sekect Student"
+                "Registration", "Student Name", "Department", "Roll", "Batch", "Session", "Phone Number", "Joining Date", "Sekect"
             }
         ));
-        studentTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                studentTableMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(studentTable);
 
         jLabel9.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
@@ -347,6 +361,7 @@ public class RemoveStudent extends javax.swing.JFrame {
         });
 
         btnReset.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-recurring_appointment.png"))); // NOI18N
         btnReset.setText("Reset");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -355,6 +370,7 @@ public class RemoveStudent extends javax.swing.JFrame {
         });
 
         btnRemove.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-delete_sign.png"))); // NOI18N
         btnRemove.setText("Remove Student");
         btnRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -395,7 +411,7 @@ public class RemoveStudent extends javax.swing.JFrame {
                         .addGap(151, 151, 151)
                         .addComponent(labelpic, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
+                        .addGap(150, 150, 150)
                         .addComponent(btnRemove))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtDepartment, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
@@ -563,26 +579,6 @@ public class RemoveStudent extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
-
-    private void studentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_studentTableMouseClicked
-        //get values from jTable to components by mouse clicked
-        int i = studentTable.getSelectedRow();
-        String registration = studentTable.getValueAt(i, 0).toString();
-        txtRegistration.setText(registration);
-        txtStudentName.setText(studentTable.getValueAt(i, 1).toString());
-        txtDepartment.setText(studentTable.getValueAt(i, 2).toString());
-        txtRoll.setText(studentTable.getValueAt(i, 3).toString());
-        txtBatch.setText(studentTable.getValueAt(i, 4).toString());
-        txtSession.setText(studentTable.getValueAt(i, 5).toString());
-        txtPhoneNumber.setText(studentTable.getValueAt(i, 6).toString());
-        String date = studentTable.getValueAt(i, 7).toString();
-        try {
-            Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-            txtJoiningDate.setDate(date1);
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(this, "Error In Table For Mouse Clicked", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_studentTableMouseClicked
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         table();

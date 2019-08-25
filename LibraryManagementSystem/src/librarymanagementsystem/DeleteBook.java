@@ -22,13 +22,14 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
  * @author adittachakraborty
  */
 public final class DeleteBook extends javax.swing.JFrame {
-    
+
     int xMouse;
     int yMouse;
     String filename = null;
@@ -42,12 +43,12 @@ public final class DeleteBook extends javax.swing.JFrame {
         JFrameIcon();
         bookTable.setRowHeight(35);
     }
-    
+
     //Setting an Icon for jFrame
     private void JFrameIcon() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Image/icons8-book_shelf.png")));
     }
-    
+
     private void bookTable(int id) {
         int bookId = id;
         try {
@@ -78,12 +79,12 @@ public final class DeleteBook extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     private void table() {
         DefaultTableModel tableModel = new DefaultTableModel();
-        String columnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price", "Remove Book"};
+        String columnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price", "Remove"};
         tableModel.setColumnIdentifiers(columnNames);
-        
+
         try {
             DBclass.createCon();
             String query = "select Id, BookName, WriterName, Edition, Quantity, Publisher, Pages, Price from Book";
@@ -98,7 +99,7 @@ public final class DeleteBook extends javax.swing.JFrame {
                 String publisher = DBclass.rs.getString(6);
                 int pages = DBclass.rs.getInt(7);
                 int price = DBclass.rs.getInt(8);
-                
+
                 Object[] row = new Object[9];
                 row[0] = id;
                 row[1] = name;
@@ -109,15 +110,15 @@ public final class DeleteBook extends javax.swing.JFrame {
                 row[6] = pages;
                 row[7] = price;
                 row[8] = "Remove";
-                
+
                 tableModel.addRow(row);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         bookTable.setModel(tableModel);
-        
+
         Action doSomething = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -126,12 +127,21 @@ public final class DeleteBook extends javax.swing.JFrame {
                 bookTable.getSelectionModel().addSelectionInterval(row, row);
                 DefaultTableModel model = (DefaultTableModel) bookTable.getModel();
                 int rowIndex = bookTable.getSelectedRow();
-                
+
                 bookTable((int) model.getValueAt(rowIndex, 0)); //Book Id
             }
         };
-        
+
         TableButton tableButton = new TableButton(bookTable, doSomething, 8);
+
+        //For set the column width
+        TableColumnModel columnModel = bookTable.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(25); //Book Id
+        columnModel.getColumn(3).setPreferredWidth(25); //Edition
+        columnModel.getColumn(4).setPreferredWidth(30); //Quantity
+        columnModel.getColumn(6).setPreferredWidth(25); //Pages
+        columnModel.getColumn(7).setPreferredWidth(25); //Price
+        columnModel.getColumn(8).setPreferredWidth(30); //Select Book
     }
 
     /**
@@ -241,7 +251,7 @@ public final class DeleteBook extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price", "Select Book"
+                "Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price", "Select"
             }
         ));
         jScrollPane1.setViewportView(bookTable);
@@ -257,6 +267,7 @@ public final class DeleteBook extends javax.swing.JFrame {
         });
 
         btnReset.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-recurring_appointment.png"))); // NOI18N
         btnReset.setText("Reset");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,6 +276,7 @@ public final class DeleteBook extends javax.swing.JFrame {
         });
 
         btnDeleteBook.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
+        btnDeleteBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-delete_sign.png"))); // NOI18N
         btnDeleteBook.setText("Delete Book");
         btnDeleteBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -388,7 +400,7 @@ public final class DeleteBook extends javax.swing.JFrame {
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        
+
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_formMouseDragged
 
@@ -416,13 +428,20 @@ public final class DeleteBook extends javax.swing.JFrame {
                     String bookName = txtBookName.getText();
                     String writername = txtWriterName.getText();
                     String edition = txtEdition.getText();
-                    
+
                     DBclass.createCon();
-                    String query = "DELETE FROM Book WHERE Id = " + bookId + " AND BookName = '" + bookName + "' AND WriterName = '" + writername + "' AND Edition = '" + edition + "'";
+                    String query = "SELECT * FROM IssueBook WHERE BookId = " + bookId;
                     DBclass.pst = DBclass.con.prepareStatement(query);
-                    DBclass.pst.executeUpdate();
-                    table();
-                    JOptionPane.showMessageDialog(this, "Book Succesfully Deleted", "Student Deleted", JOptionPane.INFORMATION_MESSAGE);
+                    DBclass.rs = DBclass.pst.executeQuery();
+                    if (DBclass.rs.next()) {
+                        JOptionPane.showMessageDialog(this, "Book Found. Return The Issued Book First", "Can't Remove Book", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        String query2 = "DELETE FROM Book WHERE Id = " + bookId + " AND BookName = '" + bookName + "' AND WriterName = '" + writername + "' AND Edition = '" + edition + "'";
+                        DBclass.pst = DBclass.con.prepareStatement(query2);
+                        DBclass.pst.executeUpdate();
+                        table();
+                        JOptionPane.showMessageDialog(this, "Book Succesfully Deleted", "Student Deleted", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(this, "Book Is Not Deleted", "Not Deleted", JOptionPane.ERROR_MESSAGE);
                 }
@@ -436,14 +455,14 @@ public final class DeleteBook extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetActionPerformed
     private void tableSearch(String bookName) {
         String bName = bookName;
-        
+
         DefaultTableModel tableModel = new DefaultTableModel();
-        String columnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price", "Remove Book"};
+        String columnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price", "Remove"};
         tableModel.setColumnIdentifiers(columnNames);
-        
+
         try {
             DBclass.createCon();
-            String query = "SELECT Id, BookName, WriterName, Edition, Quantity, Publisher, Pages, Price FROM Book WHERE BookName LIKE '%" + bName + "%'";
+            String query = "SELECT Id, BookName, WriterName, Edition, Quantity, Publisher, Pages, Price FROM Book WHERE BookName LIKE '%" + bName + "%' OR WriterName LIKE '%" + bName + "%'";
             DBclass.pst = DBclass.con.prepareStatement(query);
             DBclass.rs = DBclass.pst.executeQuery();
             while (DBclass.rs.next()) {
@@ -455,7 +474,7 @@ public final class DeleteBook extends javax.swing.JFrame {
                 String publisher = DBclass.rs.getString(6);
                 int pages = DBclass.rs.getInt(7);
                 int price = DBclass.rs.getInt(8);
-                
+
                 Object[] row = new Object[9];
                 row[0] = id;
                 row[1] = name;
@@ -466,15 +485,15 @@ public final class DeleteBook extends javax.swing.JFrame {
                 row[6] = pages;
                 row[7] = price;
                 row[8] = "Remove";
-                
+
                 tableModel.addRow(row);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         bookTable.setModel(tableModel);
-        
+
         Action doSomething = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -483,12 +502,21 @@ public final class DeleteBook extends javax.swing.JFrame {
                 bookTable.getSelectionModel().addSelectionInterval(row, row);
                 DefaultTableModel model = (DefaultTableModel) bookTable.getModel();
                 int rowIndex = bookTable.getSelectedRow();
-                
+
                 bookTable((int) model.getValueAt(rowIndex, 0)); //Book Id
             }
         };
-        
+
         TableButton tableButton = new TableButton(bookTable, doSomething, 8);
+
+        //For set the column width
+        TableColumnModel columnModel = bookTable.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(25); //Book Id
+        columnModel.getColumn(3).setPreferredWidth(25); //Edition
+        columnModel.getColumn(4).setPreferredWidth(30); //Quantity
+        columnModel.getColumn(6).setPreferredWidth(25); //Pages
+        columnModel.getColumn(7).setPreferredWidth(25); //Price
+        columnModel.getColumn(8).setPreferredWidth(30); //Select Book
     }
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
         String search = txtSearch.getText();
