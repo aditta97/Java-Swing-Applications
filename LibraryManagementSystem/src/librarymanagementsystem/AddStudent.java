@@ -312,6 +312,7 @@ public class AddStudent extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Student");
+        setResizable(false);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 formMouseDragged(evt);
@@ -381,7 +382,7 @@ public class AddStudent extends javax.swing.JFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
-        jLabel8.setText("Book Image");
+        jLabel8.setText("Student Image");
 
         studentTable.setFont(new java.awt.Font("Monaco", 0, 14)); // NOI18N
         studentTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -456,22 +457,22 @@ public class AddStudent extends javax.swing.JFrame {
                             .addComponent(jLabel10))
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAttachImage)
                             .addComponent(txtPhoneNumber)
                             .addComponent(txtSession)
                             .addComponent(txtBatch)
-                            .addComponent(btnAttachImage)
-                            .addComponent(txtJoiningDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtRegistration, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
-                            .addComponent(txtStudentName)
+                            .addComponent(txtRoll)
                             .addComponent(txtDepartment)
-                            .addComponent(txtRoll)))
+                            .addComponent(txtRegistration)
+                            .addComponent(txtStudentName)
+                            .addComponent(txtJoiningDate, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(151, 151, 151)
                         .addComponent(labelpic, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                        .addGap(29, 29, 29)
                         .addComponent(btnSave)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addGap(30, 30, 30)
                         .addComponent(btnUpdate)))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
