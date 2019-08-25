@@ -444,7 +444,7 @@ public final class AddBook extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPriceKeyTyped
     FileInputStream pic;
     //Picture format converting for attach image
-    File fi = new File(System.getProperty("user.home") + "/Desktop/Profile Picture.png");
+    File fi = new File(System.getProperty("user.home") + "/Desktop/Profile Picture.jpg");
 
     int selectAndCreate() {
         JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -598,6 +598,7 @@ public final class AddBook extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        labelpic.setIcon(null);
         txtSearch.setText("");
         txtBookName.setText("");
         txtWriterName.setText("");

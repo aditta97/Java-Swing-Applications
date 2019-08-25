@@ -102,7 +102,7 @@ public class AddStudent extends javax.swing.JFrame {
                 txtRegistration.setText(DBclass.rs.getString("Registration"));
                 txtStudentName.setText(DBclass.rs.getString("StudentName"));
                 txtDepartment.setText(DBclass.rs.getString("Department"));
-                txtRoll.setText(String.valueOf(DBclass.rs.getInt("Batch")));
+                txtRoll.setText(String.valueOf(DBclass.rs.getInt("Roll")));
                 txtBatch.setText(DBclass.rs.getString("Batch"));
                 txtSession.setText(DBclass.rs.getString("Session"));
                 txtPhoneNumber.setText(DBclass.rs.getString("PhoneNumber"));
@@ -575,7 +575,7 @@ public class AddStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPhoneNumberKeyTyped
     FileInputStream pic;
     //Picture format converting for attach image
-    File fi = new File(System.getProperty("user.home") + "/Desktop/Profile Picture.png");
+    File fi = new File(System.getProperty("user.home") + "/Desktop/Profile Picture.jpg");
 
     int selectAndCreate() {
         JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -700,38 +700,28 @@ public class AddStudent extends javax.swing.JFrame {
                 String registration = txtRegistration.getText();
 
                 DBclass.createCon();
-                String query = "UPDATE Student SET StudentName = ?, Department = ?, Roll = ?, Batch = ?, Session = ?, PhoneNumber = ?, JoiningDate = ? WHERE Registration = " + registration;
+                String query = "UPDATE Student SET StudentName = ?, Department = ?, Roll = ?, Batch = ?, Session = ?, PhoneNumber = ?, JoiningDate = ? WHERE Registration = '" + registration + "'";
                 DBclass.pst = DBclass.con.prepareStatement(query);
 
-                if (DBclass.rs.next()) {
-                    DBclass.pst.setString(1, txtRegistration.getText());
-                    try {
-                        DBclass.pst.setBinaryStream(2, pic, pic.available());
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(this, "Picture Didn't Entered", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                    DBclass.pst.setString(3, txtStudentName.getText());
-                    DBclass.pst.setString(4, txtDepartment.getText());
-                    int roll = Integer.valueOf(txtRoll.getText());
-                    DBclass.pst.setInt(5, roll);
-                    DBclass.pst.setString(6, txtBatch.getText());
-                    DBclass.pst.setString(7, txtSession.getText());
-                    DBclass.pst.setString(8, txtPhoneNumber.getText());
-                    java.sql.Date date = new java.sql.Date(txtJoiningDate.getDate().getTime());
-                    DBclass.pst.setDate(9, date);
+                DBclass.pst.setString(1, txtStudentName.getText());
+                DBclass.pst.setString(2, txtDepartment.getText());
+                int roll = Integer.valueOf(txtRoll.getText());
+                DBclass.pst.setInt(3, roll);
+                DBclass.pst.setString(4, txtBatch.getText());
+                DBclass.pst.setString(5, txtSession.getText());
+                DBclass.pst.setString(6, txtPhoneNumber.getText());
+                java.sql.Date date = new java.sql.Date(txtJoiningDate.getDate().getTime());
+                DBclass.pst.setDate(7, date);
 
-                    int k = DBclass.pst.executeUpdate();
-                    if (k != 0) {
-                        table();
-                        JOptionPane.showMessageDialog(this, "Successfully Updated");
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Not Updated", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
+                int k = DBclass.pst.executeUpdate();
+                if (k != 0) {
+                    table();
+                    JOptionPane.showMessageDialog(this, "Successfully Updated");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Student Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Not Updated", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(AddStudent.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnUpdateActionPerformed

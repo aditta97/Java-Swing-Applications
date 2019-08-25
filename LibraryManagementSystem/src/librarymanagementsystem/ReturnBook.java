@@ -153,7 +153,7 @@ public final class ReturnBook extends javax.swing.JFrame {
             DBclass.rs = DBclass.pst.executeQuery();
             while (DBclass.rs.next()) {
                 int id = DBclass.rs.getInt(1);
-                int studentId = DBclass.rs.getInt(2);
+                String studentId = DBclass.rs.getString(2);
                 String studentName = DBclass.rs.getString(3);
                 int bookId = DBclass.rs.getInt(4);
                 String bookName = DBclass.rs.getString(5);
