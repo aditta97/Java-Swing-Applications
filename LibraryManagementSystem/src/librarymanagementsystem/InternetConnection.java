@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
  * @author adittachakraborty
  */
 public class InternetConnection {
-    
-    public static boolean InternetConnection(){
+
+    public static boolean InternetConnection() {
         Socket sock = new Socket();
         InetSocketAddress addr = new InetSocketAddress("www.google.com", 80);
         try {
@@ -30,9 +30,9 @@ public class InternetConnection {
             try {
                 sock.close();
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(null,"Socket Didn't Closed!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Socket Didn't Closed!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
-    
+
 }

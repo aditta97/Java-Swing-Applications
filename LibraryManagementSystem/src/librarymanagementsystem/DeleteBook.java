@@ -82,7 +82,7 @@ public final class DeleteBook extends javax.swing.JFrame {
 
     private void table() {
         DefaultTableModel tableModel = new DefaultTableModel();
-        String columnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price", "Remove"};
+        String columnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price", "Select"};
         tableModel.setColumnIdentifiers(columnNames);
 
         try {
@@ -109,7 +109,7 @@ public final class DeleteBook extends javax.swing.JFrame {
                 row[5] = publisher;
                 row[6] = pages;
                 row[7] = price;
-                row[8] = "Remove";
+                row[8] = "Select";
 
                 tableModel.addRow(row);
             }
@@ -457,7 +457,7 @@ public final class DeleteBook extends javax.swing.JFrame {
         String bName = bookName;
 
         DefaultTableModel tableModel = new DefaultTableModel();
-        String columnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price", "Remove"};
+        String columnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Quantity", "Publisher", "Pages", "Price", "Select"};
         tableModel.setColumnIdentifiers(columnNames);
 
         try {
@@ -484,7 +484,7 @@ public final class DeleteBook extends javax.swing.JFrame {
                 row[5] = publisher;
                 row[6] = pages;
                 row[7] = price;
-                row[8] = "Remove";
+                row[8] = "Select";
 
                 tableModel.addRow(row);
             }
