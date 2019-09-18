@@ -22,11 +22,11 @@ public class DBclass {
     
     public static Connection con = null;
     public static Connection con2 = null;
+    public static Statement st = null;
     public static PreparedStatement pst = null;
     public static PreparedStatement pst2 = null;
     public static ResultSet rs = null;
     public static ResultSet rs2 = null;
-    public static Statement st = null;
     
     
     public static void createCon() {

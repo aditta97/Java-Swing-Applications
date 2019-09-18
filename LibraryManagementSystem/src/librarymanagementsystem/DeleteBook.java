@@ -114,7 +114,7 @@ public final class DeleteBook extends javax.swing.JFrame {
                 tableModel.addRow(row);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error To Get Book Table Data", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         bookTable.setModel(tableModel);
@@ -489,7 +489,7 @@ public final class DeleteBook extends javax.swing.JFrame {
                 tableModel.addRow(row);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error To Get Book Table Data", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         bookTable.setModel(tableModel);

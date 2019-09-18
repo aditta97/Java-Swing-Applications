@@ -96,7 +96,6 @@ public final class IssueBook extends javax.swing.JFrame {
                         String daysRemaing = " Days Remaining";
                         String remain = String.valueOf(positiveOfRemainningDays);
                         String remainDays = remain + daysRemaing;
-                        System.out.println(remainDays);
                         
                         //It's NULL value. So Updating real value in String after calculating remaining days
                         String query2 = "UPDATE IssueBook SET RemainingTime = ? WHERE id = " + issueId;
@@ -108,7 +107,6 @@ public final class IssueBook extends javax.swing.JFrame {
                         String text = " Days Ago";
                         String days = String.valueOf(remainingDays);
                         String finalDays = expired + days + text;
-                        System.out.println(finalDays);
                         
                         //It's NULL value. So Updating real value in String after calculating remaining days
                         String query2 = "UPDATE IssueBook SET RemainingTime = ? WHERE id = " + issueId;
@@ -120,6 +118,9 @@ public final class IssueBook extends javax.swing.JFrame {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Book Id Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            DBclass.closeCon();
+            DBclass.closeCon2();
         }
     }
 
@@ -154,7 +155,7 @@ public final class IssueBook extends javax.swing.JFrame {
 
     private void table() {
         DefaultTableModel tableModel = new DefaultTableModel();
-        String columnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Publisher", "Pages", "Add Book"};
+        String columnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Publisher", "Pages", "Issue Book"};
         tableModel.setColumnIdentifiers(columnNames);
 
         try {
@@ -177,7 +178,7 @@ public final class IssueBook extends javax.swing.JFrame {
                 row[3] = edition;
                 row[4] = publisher;
                 row[5] = pages;
-                row[6] = "Add";
+                row[6] = "Issue";
 
                 tableModel.addRow(row);
             }
@@ -562,7 +563,7 @@ public final class IssueBook extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRegistrationKeyReleased
     private void bookSearch(String bookSearch) {
         DefaultTableModel tableModel = new DefaultTableModel();
-        String columnnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Publisher", "Pages", "Add Book"};
+        String columnnNames[] = {"Book Id", "Book Name", "Writer Name", "Edition", "Publisher", "Pages", "Issue Book"};
         tableModel.setColumnIdentifiers(columnnNames);
 
         try {
@@ -586,7 +587,7 @@ public final class IssueBook extends javax.swing.JFrame {
                 row[3] = edition;
                 row[4] = publisher;
                 row[5] = pages;
-                row[6] = "Add";
+                row[6] = "Issue";
 
                 tableModel.addRow(row);
             }
