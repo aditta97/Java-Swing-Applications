@@ -5,9 +5,8 @@
  */
 package librarymanagementsystem;
 
-import com.jtattoo.plaf.bernstein.BernsteinLookAndFeel;
 import java.awt.Toolkit;
-import java.util.Properties;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -21,13 +20,17 @@ public final class ReportToEmail extends javax.swing.JFrame {
 
     int xMouse;
     int yMouse;
+    static int userId = 0;
 
     /**
      * Creates new form ReportToEmail
+     *
+     * @param userId
      */
-    public ReportToEmail() {
+    public ReportToEmail(int userId) {
         initComponents();
         JFrameIcon();
+        ReportToEmail.userId = userId;
     }
 
     //Setting an Icon for jFrame
@@ -147,13 +150,27 @@ public final class ReportToEmail extends javax.swing.JFrame {
         } else if (evt.getSource() == btnSendEmail) {
             boolean check = InternetConnection();
             if (check) {
-                String to = "adittasarma@gmail.com";
-                String subject = txtSubject.getText();
-                String message = txtMessage.getText();
-                String userName = "adittasarma@gmail.com";
-                String password = "lcmxapjhbizqxfly";
+                try {
+                    DBclass.createCon();
+                    String query = "Select * from Registration where Id = " + userId;
+                    DBclass.pst = DBclass.con.prepareStatement(query);
+                    DBclass.rs = DBclass.pst.executeQuery();
+                    if (DBclass.rs.next()) {
+                        String username = DBclass.rs.getString("Username");
+                        String userEmail = DBclass.rs.getString("Email");
+                        String phoneNumber = DBclass.rs.getString("PhoneNumber");
 
-                SendMail.send(to, subject, message, userName, password);
+                        String to = "adittasarma@gmail.com";
+                        String subject = txtSubject.getText();
+                        String message = "Name: " + username + ", Email: " + userEmail + ", Cell: " + phoneNumber + "\n\n" + txtMessage.getText();
+                        String email = "adittasarma@gmail.com";
+                        String password = "lcmxapjhbizqxfly";
+                        
+                        SendMail.send(to, subject, message, email, password);
+                    }
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "Error To Get User", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "Please check your Internet Connection!", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -193,20 +210,16 @@ public final class ReportToEmail extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         //</editor-fold>
         try {
-            Properties props = new Properties();
-            props.put("logoString", "AEC");
-            BernsteinLookAndFeel.setCurrentTheme(props);
             UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
         }
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new ReportToEmail().setVisible(true);
+            new ReportToEmail(userId).setVisible(true);
         });
     }
 

@@ -19,12 +19,15 @@ public class Dashboard extends javax.swing.JFrame {
     
     int xMouse;
     int yMouse;
+    static int userId = 0;
 
     /**
      * Creates new form Dashboard
+     * @param userId
      */
-    public Dashboard() {
+    public Dashboard(int userId) {
         initComponents();
+        Dashboard.userId = userId;
         JFrameIcon();
     }
     
@@ -342,7 +345,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        ReportToEmail rte = new ReportToEmail();
+        ReportToEmail rte = new ReportToEmail(userId);
         rte.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -405,7 +408,7 @@ public class Dashboard extends javax.swing.JFrame {
         }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Dashboard().setVisible(true);
+            new Dashboard(userId).setVisible(true);
         });
     }
 

@@ -469,13 +469,14 @@ public final class SignInSignOut extends javax.swing.JFrame {
                 DBclass.rs = DBclass.pst.executeQuery();
                 boolean flag = false;
                 if (DBclass.rs.next()) {
+                    int userId = DBclass.rs.getInt("Id");
                     //Getting user ID
                     String id = "SELECT Id FROM Registration WHERE Username = '" + uniqueUsername.getText() + "' and password = '" + this.password.getText() + "'";
                     DBclass.pst = DBclass.con.prepareStatement(id);
                     DBclass.rs = DBclass.pst.executeQuery();
                     if (DBclass.rs.next()) {
                         JOptionPane.showMessageDialog(this, "Hi " + uniqueUsername.getText() + " you are logined as ");
-                        Dashboard d = new Dashboard();
+                        Dashboard d = new Dashboard(userId);
                         flag = true;
                         d.setVisible(true);
                         this.setVisible(false);
@@ -491,6 +492,7 @@ public final class SignInSignOut extends javax.swing.JFrame {
                         
                         DBclass.rs = DBclass.pst.executeQuery();
                         if (DBclass.rs.next()) {
+                            int userId = DBclass.rs.getInt("Id");
                             if (RememberMe.isSelected()) {
                                 try {
                                     File ob = new File("LoginData/" + uniqueUsername.getText() + ".txt");
@@ -509,7 +511,7 @@ public final class SignInSignOut extends javax.swing.JFrame {
                             if (DBclass.rs.next()) {
                                 String name = DBclass.rs.getString("Username");
                                 JOptionPane.showMessageDialog(this, "Hi " + name + " you are logined as ");
-                                Dashboard d = new Dashboard();
+                                Dashboard d = new Dashboard(userId);
                                 flag = true;
                                 d.setVisible(true);
                                 this.setVisible(false);

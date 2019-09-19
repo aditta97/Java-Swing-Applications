@@ -23,25 +23,26 @@ import javax.swing.JOptionPane;
  */
 public class SendMail {
 
-    public static void send(String to, String sub, String msg, final String userName, final String pass) {
+    public static void send(String to, String sub, String msg, final String email, final String pass) {
         Properties props = new Properties();
 
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
+        //poort 587, 465
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
 
         Session session = Session.getDefaultInstance(props, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(userName, pass);
+                return new PasswordAuthentication(email, pass);
             }
         });
 
         try {
             Message message = new MimeMessage(session);
 
-            message.setFrom(new InternetAddress(userName));
+            message.setFrom(new InternetAddress(email));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(sub);
             message.setText(msg);
@@ -49,6 +50,7 @@ public class SendMail {
             Transport.send(message);
             JOptionPane.showMessageDialog(null, "Email Sent!");
         } catch (HeadlessException | MessagingException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Email Not Sent!", "Error", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
