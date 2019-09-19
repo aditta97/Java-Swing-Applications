@@ -50,7 +50,6 @@ public class SendMail {
             Transport.send(message);
             JOptionPane.showMessageDialog(null, "Email Sent!");
         } catch (HeadlessException | MessagingException e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Email Not Sent!", "Error", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
